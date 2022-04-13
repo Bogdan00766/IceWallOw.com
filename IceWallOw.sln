@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceWallOw.Console", "IceWallOw.Console\IceWallOw.Console.csproj", "{35C7AD4C-972A-4C02-9237-4C6ECC7F87E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbInfrastructure", "DbInfrastructure\DbInfrastructure.csproj", "{E75E0A9B-2E39-4409-BFBF-15A19AE09022}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{35C7AD4C-972A-4C02-9237-4C6ECC7F87E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35C7AD4C-972A-4C02-9237-4C6ECC7F87E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35C7AD4C-972A-4C02-9237-4C6ECC7F87E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E75E0A9B-2E39-4409-BFBF-15A19AE09022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E75E0A9B-2E39-4409-BFBF-15A19AE09022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E75E0A9B-2E39-4409-BFBF-15A19AE09022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E75E0A9B-2E39-4409-BFBF-15A19AE09022}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
