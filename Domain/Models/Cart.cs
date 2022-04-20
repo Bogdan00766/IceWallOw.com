@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    internal class Cart : Entity
+    public class Cart : Entity
     {
+        public string Name { get; set; }
         public User Owner { get; set; }
         public Product Product { get; set; }
     }

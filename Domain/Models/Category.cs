@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    internal class Category : Entity
+    public class Category : Entity
     {
         //TODO dodać kolumny dla tabeli
         public List<Product> Products { get; set; }

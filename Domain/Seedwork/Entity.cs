@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Seedwork
 {
-    internal abstract class Entity
+    public class Entity
     {
         public int Id { get; set; }
     }
