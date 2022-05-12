@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceWallOw.Console", "IceWal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbInfrastructure", "DbInfrastructure\DbInfrastructure.csproj", "{E75E0A9B-2E39-4409-BFBF-15A19AE09022}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{EBEEEA11-8888-40FA-888C-69E90473F24B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{EBEEEA11-8888-40FA-888C-69E90473F24B}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "IceWallOw.React", "IceWallOw.React\IceWallOw.React.esproj", "{19866F92-268D-4D35-9B4A-0B76E1F1F067}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,12 @@ Global
 		{EBEEEA11-8888-40FA-888C-69E90473F24B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBEEEA11-8888-40FA-888C-69E90473F24B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBEEEA11-8888-40FA-888C-69E90473F24B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19866F92-268D-4D35-9B4A-0B76E1F1F067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19866F92-268D-4D35-9B4A-0B76E1F1F067}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19866F92-268D-4D35-9B4A-0B76E1F1F067}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{19866F92-268D-4D35-9B4A-0B76E1F1F067}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19866F92-268D-4D35-9B4A-0B76E1F1F067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19866F92-268D-4D35-9B4A-0B76E1F1F067}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
