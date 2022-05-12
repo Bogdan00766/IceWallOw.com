@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DbInfrastructure
 {
-    internal class IceWallOwDbContext : DbContext
+    public class IceWallOwDbContext : DbContext
     {
         public DbSet<Cart> Cart { get; set; }
         public DbSet<Category> Category { get; set; }
