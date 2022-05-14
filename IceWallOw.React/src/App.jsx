@@ -1,13 +1,12 @@
-//JSX - java script extension (react extension)
-import React, {Component } from "react"
-export class NavBar extends Component {
+import { extend } from "jquery";
+import React, { Component } from "react";
+import NavBar from "./NavBar"
+import MainContent from "./MainContent"
+export default class App extends Component {
     render() {
-        return (
-            <React.Fragment>
-                <h1>Hello</h1>
-                <p class="hightlight">paragraph</p>
+        return <React.Fragment>
+            <NavBar />
+            <MainContent/>
             </React.Fragment>
-        ); 
     }
 }
-export default NavBar
