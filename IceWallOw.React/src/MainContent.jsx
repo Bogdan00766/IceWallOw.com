@@ -9,8 +9,8 @@ export default class MainContent extends Component {
             { id: 1, name: "Scott", phone: "123-456", address: { city: "myszogrud" } },
             { id: 2, name: "Jones", phone: "234-456", address: { city: "orlean" } },
             { id: 3, name: "James", phone: "123-426", address: { city: "kolno" } },
-            { id: 4, name: "Alex", phone: "122-123", address: { city: "lomza" } },
-            { id: 5, name: "John", phone: "555-666", address: { city: "bydgoszcz" } },
+            { id: 4, name: "Alex", phone: null, address: { city: "lomza" } },
+            { id: 5, name: "John", phone: null, address: { city: "bydgoszcz" } },
         ],
     };
 
@@ -37,7 +37,8 @@ export default class MainContent extends Component {
                                     <tr key={cust.id}>
                                         <td>{cust.id}</td>
                                         <td>{cust.name}</td>
-                                        <td>{cust.phone}</td>
+                                        <td>{cust.phone ? (cust.phone) : (<div className="bg-warning p-2 text-center">No phone</div>
+                                        )}</td>
                                         <td>{cust.address.city}</td>
                                     </tr>
                                 );
