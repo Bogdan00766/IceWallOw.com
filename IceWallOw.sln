@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceWallOw.Api", "IceWallOw.Api\IceWallOw.Api.csproj", "{E7AE8F38-A90D-414C-B2FC-D109C02F6FEC}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "IceWallOw.React", "IceWallOw.React\IceWallOw.React.esproj", "{19866F92-268D-4D35-9B4A-0B76E1F1F067}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
