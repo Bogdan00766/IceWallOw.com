@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceWallOw.Api", "IceWallOw.
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "IceWallOw.React", "IceWallOw.React\IceWallOw.React.esproj", "{19866F92-268D-4D35-9B4A-0B76E1F1F067}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "IceWallOw.React", "IceWallOw.React\IceWallOw.React.esproj", "{19866F92-268D-4D35-9B4A-0B76E1F1F067}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
