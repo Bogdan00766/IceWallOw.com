@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbInfrastructure", "DbInfra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{EBEEEA11-8888-40FA-888C-69E90473F24B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceWallOw.Api", "IceWallOw.Api\IceWallOw.Api.csproj", "{E7AE8F38-A90D-414C-B2FC-D109C02F6FEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceWallOw.Api", "IceWallOw.Api\IceWallOw.Api.csproj", "{E7AE8F38-A90D-414C-B2FC-D109C02F6FEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceWallOw.GoogleMaps", "IceWallOw.GoogleMaps\IceWallOw.GoogleMaps.csproj", "{A5778518-D65E-46DA-9BD3-651D5BE0D30B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E7AE8F38-A90D-414C-B2FC-D109C02F6FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7AE8F38-A90D-414C-B2FC-D109C02F6FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7AE8F38-A90D-414C-B2FC-D109C02F6FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5778518-D65E-46DA-9BD3-651D5BE0D30B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5778518-D65E-46DA-9BD3-651D5BE0D30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5778518-D65E-46DA-9BD3-651D5BE0D30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5778518-D65E-46DA-9BD3-651D5BE0D30B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
