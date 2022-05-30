@@ -11,5 +11,7 @@ namespace Domain.Models
     {
         //TODO dodać kolumny dla tabeli
         public List<Product> Products { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
