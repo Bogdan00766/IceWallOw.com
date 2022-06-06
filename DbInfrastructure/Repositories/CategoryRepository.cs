@@ -1,5 +1,6 @@
 ﻿using Domain.IRepositories;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace DbInfrastructure.Repositories
         public CategoryRepository(IceWallOwDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<List<Category>> FindByName(string name)
+        {
+            return await _dbContext.Category.Where(x => x.Name == name).ToListAsync();
         }
     }
 }

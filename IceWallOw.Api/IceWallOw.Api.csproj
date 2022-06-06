@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DbInfrastructure\DbInfrastructure.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\IceWallOw.GoogleMaps\IceWallOw.GoogleMaps.csproj" />
   </ItemGroup>
 
 </Project>
