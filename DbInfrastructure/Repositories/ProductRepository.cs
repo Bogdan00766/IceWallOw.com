@@ -9,11 +9,25 @@ using System.Threading.Tasks;
 
 namespace DbInfrastructure.Repositories
 {
-    internal class ProductRepository : Repository<Product>, IProductRepository
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
+        
         public ProductRepository(IceWallOwDbContext dbContext) : base(dbContext)
+        {          
+        }
+        new public async Task<List<Product>> FindAllAsync()
         {
-            _dbContext = dbContext;
+            return await _dbContext.Product
+                .Include(x => x.Category)
+                .ToListAsync();
+          
+        }
+
+        public async Task<List<Product>> FindByName(string name)
+        {
+            return await _dbContext.Product.Where(x => x.Name == name)
+                .Include(x => x.Category)
+                .ToListAsync();
         }
 
         //public async Task<List<Product>> FindAllAsync()
