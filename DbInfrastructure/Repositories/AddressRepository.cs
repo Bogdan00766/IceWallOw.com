@@ -12,7 +12,6 @@ namespace DbInfrastructure.Repositories
     {
         public AddressRepository(IceWallOwDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
         }
     }
 }
