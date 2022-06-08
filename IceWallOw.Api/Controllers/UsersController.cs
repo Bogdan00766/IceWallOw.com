@@ -1,8 +1,13 @@
-﻿using IceWallOw.Application.Dto;
+﻿using Domain.Models;
+using IceWallOw.Application.Dto;
 using IceWallOw.Application.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
+using System.Security.Claims;
 
 namespace IceWallOw.Api.Controllers
 {
@@ -11,14 +16,18 @@ namespace IceWallOw.Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UsersController(IUserService userService)
+        private readonly ILogger<User> _logger;
+
+        public UsersController(IUserService userService, ILogger<User> logger)
         {
             _userService = userService;
+            _logger = logger;
         }
 
         [HttpPost("Register")]
         public IActionResult Post(RegisterUserDto rud)
         {
+            _logger.LogInformation("Register POST request");
             UserDto newUser;
             try
             {
@@ -26,14 +35,18 @@ namespace IceWallOw.Api.Controllers
             }
             catch(Exception e)
             {
+                _logger.LogError(e.Message);
                 return BadRequest(e.Message);
             }
+            _logger.LogCritical($"User {newUser.Name} created");
             return Created("/api/users/login", newUser);
         }
 
+        
         [HttpPost("Login")]
-        public IActionResult Post(LoginUserDto lud)
+        public async Task<IActionResult> PostAsync(LoginUserDto lud)
         {
+            
             UserDto user;
             try
             {
@@ -44,8 +57,17 @@ namespace IceWallOw.Api.Controllers
                 if (e.Message.Contains("Wrong password")) return BadRequest("Wrong password");
                 return StatusCode(500);
             }
-            //Set("GUID", "xddd", 5000); 
-            //Response.Cookies.Append("GUID", "XD");
+
+            var resp = new HttpResponseMessage();
+
+            Guid id = Guid.NewGuid();
+            _userService.SetGuidAsync(Guid id);
+            HttpContext.Response.Cookies.Append("GUID",id.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(1),
+                // every othe options like path , ...
+            });
+
             return Ok(user);
         }
         [HttpDelete]

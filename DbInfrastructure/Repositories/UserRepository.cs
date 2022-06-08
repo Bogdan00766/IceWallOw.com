@@ -47,5 +47,12 @@ namespace DbInfrastructure.Repositories
             return _dbContext.User.Where(x => x.EMail == email).FirstOrDefault();
 
         }
+
+        public void SetGuid(Guid id, int userId)
+        {
+            var user = _dbContext.User.Where(x => x.Id == userId).FirstOrDefault();
+            user.AutoLoginGUID = id.ToString();
+            user.AutoLoginGUIDExpires = DateTime.Now;
+        }
     }
 }

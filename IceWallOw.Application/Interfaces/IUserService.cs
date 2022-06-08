@@ -13,6 +13,7 @@ namespace IceWallOw.Application.Interfaces
         UserDto Login(string username, string password);
         Task<bool> Logout(int id);
         UserDto Register(string name, string lastName, string password, string email);
+        void SetGuid(Guid id);
         bool ChangePassword(int id, string newpassword);
         bool ForgotPassword(string email);
         //bool ChangeEmail(string email);

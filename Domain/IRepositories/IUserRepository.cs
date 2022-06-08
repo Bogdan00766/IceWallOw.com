@@ -11,5 +11,6 @@ namespace Domain.IRepositories
     {
         User FindByEmail(string email);
         bool CheckPassword(string email, byte[] hash);
+        void SetGuid(Guid id);
     }
 }

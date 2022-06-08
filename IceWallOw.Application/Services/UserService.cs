@@ -50,7 +50,6 @@ namespace IceWallOw.Application.Services
             }
             if (_userRepository.CheckPassword(email, hash))
             {
-                user.IsLogged = true;
                 _userRepository.SaveAsync();
                 return _mapper.Map<UserDto>(user);
             }
@@ -60,8 +59,8 @@ namespace IceWallOw.Application.Services
         public async Task<bool> Logout(int id)
         {
             var user = await _userRepository.FindByIdAsync(id);
-            if (user.IsLogged == false) throw new Exception("User is not logged");
-            user.IsLogged = false;
+            //if (user.IsLogged == false) throw new Exception("User is not logged");
+            //user.IsLogged = false;
             _userRepository.SaveAsync();
             return true;
         }
@@ -86,7 +85,7 @@ namespace IceWallOw.Application.Services
                 LastName = lastName,
                 Password = hash,
                 EMail = email,
-                IsLogged = false,
+                //IsLogged = false,
             };
             
             var usr = _userRepository.Create(user);
@@ -94,6 +93,11 @@ namespace IceWallOw.Application.Services
 
             return _mapper.Map<UserDto>(usr);
         }
-       
+
+        public void SetGuid(Guid id)
+        {
+            _userRepository.SetGuid(id);
+            _userRepository.SaveAsync();
+        }
     }
 }

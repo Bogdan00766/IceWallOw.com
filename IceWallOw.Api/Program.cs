@@ -4,6 +4,7 @@ using Domain.IRepositories;
 using IceWallOw.Application.Interfaces;
 using IceWallOw.Application.Mappings;
 using IceWallOw.Application.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,11 +18,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
-builder.Services.AddSession(cfg =>
-{
-    cfg.IdleTimeout = TimeSpan.FromMinutes(30);
-});
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -29,12 +25,6 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.EnableAnnotations();
 });
-//builder.Services.AddControllersWithViews()
-//    .AddNewtonsoftJson(options =>
-//    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-//);
-//builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
-//builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -46,8 +36,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseSession();
-app.UseAuthorization();
 
 app.MapControllers();
 
