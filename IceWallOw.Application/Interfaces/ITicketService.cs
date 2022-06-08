@@ -9,6 +9,6 @@ namespace IceWallOw.Application.Interfaces
 {
     public interface ITicketService
     {
-        UserDto FindUserByGuid(Guid guid);
+        UserDto? FindUserByGuid(Guid guid);
     }
 }

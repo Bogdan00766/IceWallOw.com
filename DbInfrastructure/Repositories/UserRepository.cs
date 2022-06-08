@@ -52,7 +52,7 @@ namespace DbInfrastructure.Repositories
         {
             var user = _dbContext.User.Where(x => x.Id == userId).FirstOrDefault();
             user.AutoLoginGUID = id.ToString();
-            user.AutoLoginGUIDExpires = DateTime.Now;
+            user.AutoLoginGUIDExpires = DateTime.Now.AddDays(1);
         }
 
         public User? FindUserByGUID(Guid guid)

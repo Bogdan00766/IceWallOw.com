@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    public class Ticket : Entity
+    public class Chat : Entity
     {
-        public string Title { get; set; }
-        public Chat Chat { get; set; }
-        public DateTime? CreationTime { get; set; }
+        public List <User> Users{ get; set; }       
+        public List<Message> Messages { get; set; }
+
     }
 }

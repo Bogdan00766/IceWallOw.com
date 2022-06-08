@@ -22,5 +22,7 @@ namespace Domain.Models
         public string AutoLoginGUID { get; set; }
         public DateTime AutoLoginGUIDExpires { get; set; }
         public List<Cart> Cart { get; set; }
+        public List<Chat> Chats { get; set; }
+        public List<Message> Messages { get; set; }
     }
 }
