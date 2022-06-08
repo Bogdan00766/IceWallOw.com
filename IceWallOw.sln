@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbInfrastructure", "DbInfra
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AB675993-CEF3-415A-8E01-7F6F23C02429}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceWallOwWeb", "IceWallOwWeb\IceWallOwWeb.csproj", "{3CA0A2E4-7FE0-4501-9392-9AA6B191F29C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceWallOwWeb", "IceWallOwWeb\IceWallOwWeb.csproj", "{3CA0A2E4-7FE0-4501-9392-9AA6B191F29C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceWallOw.Application", "IceWallOw.Application\IceWallOw.Application.csproj", "{71C7BE7C-E8FD-4C7F-9613-464931073EB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{3CA0A2E4-7FE0-4501-9392-9AA6B191F29C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CA0A2E4-7FE0-4501-9392-9AA6B191F29C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CA0A2E4-7FE0-4501-9392-9AA6B191F29C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71C7BE7C-E8FD-4C7F-9613-464931073EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71C7BE7C-E8FD-4C7F-9613-464931073EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71C7BE7C-E8FD-4C7F-9613-464931073EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71C7BE7C-E8FD-4C7F-9613-464931073EB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
