@@ -20,6 +20,11 @@ namespace IceWallOwWeb.Support
         {
             _logger.LogInformation(0, "Creating token for " + clientId);
             _logger.LogError(1, "Creating tokens not implemented");
+
+            /*
+             * Tutaj zaimplementuj pobieranie tokenu!
+             */
+
             throw new NotImplementedException("Creating tokens not implemented");
             int tokenId = 1;
             _logger.LogInformation(2, $"Received tokenId {tokenId} for clientId {clientId}");
