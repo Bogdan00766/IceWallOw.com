@@ -16,7 +16,7 @@ namespace IceWallOwWeb.Support
             };
             _producer = new ProducerBuilder<Null, int>(config).Build();
         }
-        public async Task CreateMessage(int clientId, CancellationToken cancellationToken)
+        public async Task CreateMessage(int clientId, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Creating token for " + clientId);
             _logger.LogError("Creating tokens not implemented");

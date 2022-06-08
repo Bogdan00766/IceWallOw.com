@@ -2,6 +2,6 @@
 {
     public interface IMessageProducer
     {
-        Task CreateMessage(int producerId, CancellationToken cancellationToken);
+        Task CreateMessage(int producerId, CancellationToken cancellationToken = default);
     }
 }
