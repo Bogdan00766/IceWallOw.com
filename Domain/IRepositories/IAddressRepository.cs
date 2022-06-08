@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.IRepositories
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface IAddressRepository : IRepository<Address>
     {
-        public Task<Category> FindByNameAsync(string name);
+
     }
 }
