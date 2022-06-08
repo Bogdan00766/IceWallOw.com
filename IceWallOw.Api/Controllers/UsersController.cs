@@ -34,15 +34,15 @@ namespace IceWallOw.Api.Controllers
         public IActionResult Post(LoginUserDto lud)
         {
             UserDto user;
-            //try
-            //{
+            try
+            {
                 user = _userService.Login(lud.EMail, lud.Password);
-            //}
-            //catch (Exception e)
-            //{
-            //    if (e.Message.Equals("WrongPassword")) return BadRequest("Wrong password");
-            //    return StatusCode(500);
-            //}
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("Wrong password")) return BadRequest("Wrong password");
+                return StatusCode(500);
+            }
             return Ok(user);
         }
     }

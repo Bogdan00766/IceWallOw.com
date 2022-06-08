@@ -46,7 +46,7 @@ namespace IceWallOw.Application.Services
             byte[] hash;
             using (SHA256 sha256 = SHA256.Create())
             {
-                hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(user.EMail+password));
+                hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(email+password));
             }
             if (_userRepository.CheckPassword(email, hash))
             {
