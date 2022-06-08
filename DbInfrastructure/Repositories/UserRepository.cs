@@ -54,5 +54,10 @@ namespace DbInfrastructure.Repositories
             user.AutoLoginGUID = id.ToString();
             user.AutoLoginGUIDExpires = DateTime.Now;
         }
+
+        public User? FindUserByGUID(Guid guid)
+        {
+            return _dbContext.User.Where(x => x.AutoLoginGUID == guid.ToString()).FirstOrDefault();
+        }
     }
 }

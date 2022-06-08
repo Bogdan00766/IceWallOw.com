@@ -94,9 +94,9 @@ namespace IceWallOw.Application.Services
             return _mapper.Map<UserDto>(usr);
         }
 
-        public void SetGuid(Guid id)
+        public void SetGuid(Guid id, int userId)
         {
-            _userRepository.SetGuid(id);
+            _userRepository.SetGuid(id, userId);
             _userRepository.SaveAsync();
         }
     }

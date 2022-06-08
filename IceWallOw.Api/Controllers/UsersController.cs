@@ -61,7 +61,7 @@ namespace IceWallOw.Api.Controllers
             var resp = new HttpResponseMessage();
 
             Guid id = Guid.NewGuid();
-            _userService.SetGuidAsync(Guid id);
+            _userService.SetGuid(id, user.Id);
             HttpContext.Response.Cookies.Append("GUID",id.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
             {
                 Expires = DateTime.Now.AddDays(1),
