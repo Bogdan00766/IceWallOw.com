@@ -21,15 +21,19 @@ namespace IceWallOw.Api.Controllers
             _logger = logger;
             _producer = new ProducerBuilder<Null, int>(config).Build();
         }
-        [HttpGet("CreateTicket")]
-        public async Task<IActionResult> CreateTicket(int clientId)
+        [HttpPost("CreateTicket")]
+        public async Task<IActionResult> CreateTicket()
         {
+            string guid = Request.Headers["GUID"];
+
+            throw new NotImplementedException("Pobieranie id nie zostało zaimplementowane");
+
+            int clientId = 4;
             _logger.LogInformation(0, "Creating token for " + clientId);
             _logger.LogError(1, "Creating tokens not implemented");
 
-            /*
-             * Tutaj zaimplementuj pobieranie ticketu!
-             */
+            throw new NotImplementedException("Pobieranie czatu nie zostalo zaimplementowane");
+
             var token = new TicketDto(0)
             {
                 Chat = new ChatDto(0)
