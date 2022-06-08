@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace IceWallOw.Application.Interfaces
 {
-    internal interface IUserService
+    public interface IUserService
     {
         UserDto Login(string username, string password);
         Task<bool> Logout(int id);
         UserDto Register(string name, string lastName, string password, string email);
-        bool ChangePassword(string password);
+        bool ChangePassword(int id, string newpassword);
         bool ForgotPassword(string email);
-        bool ChangeEmail(string email);
+        //bool ChangeEmail(string email);
     }
 }

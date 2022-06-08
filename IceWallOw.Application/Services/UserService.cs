@@ -21,13 +21,13 @@ namespace IceWallOw.Application.Services
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        public bool ChangeEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool ChangePassword(string password)
+        public bool ChangePassword(int id, string newpassword)
         {
+            //if(email == null) throw new ArgumentNullException("Email cannot be null");
+            //if (newpassword == null) throw new ArgumentNullException("New password cannot be null");
+            //var user = _userRepository.FindByEmail(email);
+            //if (user == null) throw new Exception("User not found");
             throw new NotImplementedException();
         }
 
@@ -46,10 +46,14 @@ namespace IceWallOw.Application.Services
             byte[] hash;
             using (SHA256 sha256 = SHA256.Create())
             {
-                hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                hash = sha256.ComputeHash(hash);
+                hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(user.EMail+password));
             }
-            if (_userRepository.CheckPassword(email, hash)) return _mapper.Map<UserDto>(user);
+            if (_userRepository.CheckPassword(email, hash))
+            {
+                user.IsLogged = true;
+                _userRepository.SaveAsync();
+                return _mapper.Map<UserDto>(user);
+            }
             else throw new Exception("Wrong password");
         }
 
@@ -75,7 +79,6 @@ namespace IceWallOw.Application.Services
             using (SHA256 sha256 = SHA256.Create()) 
             {
                 hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                hash = sha256.ComputeHash(hash);
             }
             User user = new User()
             {

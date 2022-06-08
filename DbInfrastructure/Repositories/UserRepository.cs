@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DbInfrastructure.Repositories
 {
-    internal class UserRepository : Repository<User>, IUserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(IceWallOwDbContext dbContext) : base(dbContext)
         {
