@@ -15,7 +15,7 @@ namespace Domain.Models
         public string Description { get; set; }
         public string PhotoPath { get; set; }
         public float Price { get; set; }
-        public string Location { get; set; }
+        public string location { get; set; }
         public Category Category { get; set; }
     }
 }

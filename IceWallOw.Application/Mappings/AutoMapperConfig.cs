@@ -16,6 +16,7 @@ namespace IceWallOw.Application.Mappings
             {
                 cfg.CreateMap<Product, ProductDto>();
                 cfg.CreateMap<CreateProductDto, Product>();
+                cfg.CreateMap<User, UserDto>();
             })
             .CreateMapper();
         

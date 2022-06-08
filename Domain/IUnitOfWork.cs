@@ -9,7 +9,6 @@ namespace Domain
 {
     public interface IUnitOfWork : IDisposable
     {
-        public IAddressRepository AddressRepository { get; }
         public ICartRepository CartRepository { get; }
         public ICategoryRepository CategoryRepository { get; }
         public IProductRepository ProductRepository { get; }
