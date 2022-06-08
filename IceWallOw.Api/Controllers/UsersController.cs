@@ -2,6 +2,7 @@
 using IceWallOw.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 
 namespace IceWallOw.Api.Controllers
 {
@@ -43,7 +44,22 @@ namespace IceWallOw.Api.Controllers
                 if (e.Message.Contains("Wrong password")) return BadRequest("Wrong password");
                 return StatusCode(500);
             }
+            //Set("GUID", "xddd", 5000); 
+            //Response.Cookies.Append("GUID", "XD");
             return Ok(user);
         }
+        [HttpDelete]
+        public void Set(string key, string value, int? expireTime)
+        {
+            CookieOptions option = new CookieOptions();
+
+            if (expireTime.HasValue)
+                option.Expires = DateTime.Now.AddMinutes(expireTime.Value);
+            else
+                option.Expires = DateTime.Now.AddMilliseconds(10);
+
+            Response.Cookies.Append(key, value, option);
+        }
+
     }
 }
