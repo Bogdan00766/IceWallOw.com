@@ -2,12 +2,12 @@
 
 namespace IceWallOwWeb.Support
 {
-    public class Kafka : IMessager, IDisposable
+    public class KafkaProducer : IDisposable, IMessageProducer
     {
         private readonly ILogger<Kafka> _logger;
         private IProducer<Null, int>? _producer;
 
-        public Kafka(ILogger<Kafka> logger) => _logger = logger;
+        public KafkaProducer(ILogger<Kafka> logger) => _logger = logger;
         public async Task CreateToken(int clientId, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Creating new token for clientId " + clientId);
@@ -28,10 +28,6 @@ namespace IceWallOwWeb.Support
                 Value = tokenId
             }, cancellationToken);
             _producer.Flush(cancellationToken);
-        }
-        public void ReadToken()
-        {
-            throw new NotImplementedException();
         }
         public void Dispose()
         {
