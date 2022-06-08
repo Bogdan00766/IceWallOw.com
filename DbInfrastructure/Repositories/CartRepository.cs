@@ -12,7 +12,7 @@ namespace DbInfrastructure.Repositories
     {
         public CartRepository(IceWallOwDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
+            //_dbContext = dbContext;
         }
     }
 }
