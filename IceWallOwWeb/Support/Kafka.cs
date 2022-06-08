@@ -2,7 +2,7 @@
 
 namespace IceWallOwWeb.Support
 {
-    public class Kafka : IMessager
+    public class Kafka : IMessager, IDisposable
     {
         private readonly ILogger<Kafka> _logger;
         private IProducer<Null, int>? _producer;
@@ -29,10 +29,14 @@ namespace IceWallOwWeb.Support
             }, cancellationToken);
             _producer.Flush(cancellationToken);
         }
-
         public void ReadToken()
         {
             throw new NotImplementedException();
+        }
+        public void Dispose()
+        {
+            if (_producer != null)
+                _producer.Dispose();
         }
     }
 }
