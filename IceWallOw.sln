@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceWallOw.GoogleMaps", "Ice
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbInfrastructure", "DbInfrastructure\DbInfrastructure.csproj", "{EA18B50D-A2EE-4183-BF03-8411F3A360BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceWallOwWeb", "IceWallOwWeb\IceWallOwWeb.csproj", "{AEF624B0-0E9E-4067-A0E3-85D1AB591C57}"
-EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AB675993-CEF3-415A-8E01-7F6F23C02429}"
 EndProject
 Global
@@ -45,10 +43,6 @@ Global
 		{EA18B50D-A2EE-4183-BF03-8411F3A360BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA18B50D-A2EE-4183-BF03-8411F3A360BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA18B50D-A2EE-4183-BF03-8411F3A360BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AEF624B0-0E9E-4067-A0E3-85D1AB591C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AEF624B0-0E9E-4067-A0E3-85D1AB591C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEF624B0-0E9E-4067-A0E3-85D1AB591C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AEF624B0-0E9E-4067-A0E3-85D1AB591C57}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB675993-CEF3-415A-8E01-7F6F23C02429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB675993-CEF3-415A-8E01-7F6F23C02429}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB675993-CEF3-415A-8E01-7F6F23C02429}.Release|Any CPU.ActiveCfg = Release|Any CPU
