@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace DbInfrastructure.Repositories
 {
-    internal class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
         public CategoryRepository(IceWallOwDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
+            //_dbContext = dbContext;
         }
 
-        public async Task<List<Category>> FindByName(string name)
+        public async Task<Category> FindByNameAsync(string name)
         {
-            return await _dbContext.Category.Where(x => x.Name == name).ToListAsync();
+            return await _dbContext.Category.Where(x => x.Name.ToLower() == name.ToLower()).FirstOrDefaultAsync();
         }
     }
 }

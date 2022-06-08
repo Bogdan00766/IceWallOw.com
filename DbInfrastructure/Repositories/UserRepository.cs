@@ -12,9 +12,6 @@ namespace DbInfrastructure.Repositories
     {
         public UserRepository(IceWallOwDbContext dbContext) : base(dbContext)
         {
-<<<<<<< HEAD
-            _dbContext = dbContext;
-=======
         }
 
         public bool CheckPassword(string email, byte[] hash)
@@ -32,7 +29,6 @@ namespace DbInfrastructure.Repositories
         {
             return _dbContext.User.Where(x => x.EMail == email).FirstOrDefault();
 
->>>>>>> Backend
         }
     }
 }

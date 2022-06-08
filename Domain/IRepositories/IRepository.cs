@@ -14,5 +14,7 @@ namespace Domain.IRepositories
         T Delete(T e);
         Task<T> FindByIdAsync(int id);
         Task<List<T>> FindAllAsync();
+        void SaveAsync();
+        void DisposeAsync();
     }
 }
