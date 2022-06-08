@@ -18,12 +18,12 @@ namespace IceWallOwWeb.Support
         }
         public async Task CreateMessage(int clientId, CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Creating token for " + clientId);
-            _logger.LogError("Creating tokens not implemented");
+            _logger.LogInformation(0, "Creating token for " + clientId);
+            _logger.LogError(1, "Creating tokens not implemented");
             throw new NotImplementedException("Creating tokens not implemented");
             int tokenId = 1;
-            _logger.LogInformation($"Received tokenId {tokenId} for clientId {clientId}");
-            _logger.LogInformation($"Sending tokenId {tokenId} to broker");
+            _logger.LogInformation(2, $"Received tokenId {tokenId} for clientId {clientId}");
+            _logger.LogInformation(3, $"Sending tokenId {tokenId} to broker");
             await _producer.ProduceAsync("Tokens", new Message<Null, int>()
             {
                 Value = clientId
