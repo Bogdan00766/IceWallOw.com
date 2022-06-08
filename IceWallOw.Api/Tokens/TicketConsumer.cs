@@ -2,7 +2,7 @@
 using System.Collections;
 using IceWallOw.Application.Dto;
 
-namespace IceWallOwWeb.Support
+namespace IceWallOw.Api.Tokens
 {
     public class TicketConsumer : IEnumerable<TicketDto>
     {

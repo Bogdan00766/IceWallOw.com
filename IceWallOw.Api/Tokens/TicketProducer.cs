@@ -1,6 +1,6 @@
 ﻿using Confluent.Kafka;
 
-namespace IceWallOwWeb.Support
+namespace IceWallOw.Api.Tokens
 {
     public class TicketProducer : IMessageProducer, IDisposable
     {

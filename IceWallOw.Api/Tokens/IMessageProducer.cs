@@ -1,4 +1,4 @@
-﻿namespace IceWallOwWeb.Support
+﻿namespace IceWallOw.Api.Tokens
 {
     public interface IMessageProducer
     {
