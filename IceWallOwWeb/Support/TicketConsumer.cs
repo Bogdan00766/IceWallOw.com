@@ -1,10 +1,10 @@
 ﻿using Confluent.Kafka;
 using System.Collections;
-using IceWallOw.Application.Classes;
+using IceWallOw.Application.Dto;
 
 namespace IceWallOwWeb.Support
 {
-    public class TicketConsumer : IEnumerable<Ticket>
+    public class TicketConsumer : IEnumerable<TicketDto>
     {
         private readonly IConsumer<Null, int> _consumer;
         public TicketConsumer()
@@ -19,7 +19,7 @@ namespace IceWallOwWeb.Support
             _consumer.Subscribe("Tokens");
         }
 
-        public IEnumerator<Ticket> GetEnumerator()
+        public IEnumerator<TicketDto> GetEnumerator()
         {
             return new TicketConsumerEnum(_consumer);
         }
@@ -29,17 +29,17 @@ namespace IceWallOwWeb.Support
             return new TicketConsumerEnum(_consumer);
         }
     }
-    internal class TicketConsumerEnum : IEnumerator<Ticket>
+    internal class TicketConsumerEnum : IEnumerator<TicketDto>
     {
         private readonly IConsumer<Null, int> _consumer;
-        private Ticket _ticket = new Ticket(-1);
+        private TicketDto _ticket = new TicketDto(-1);
 
         public TicketConsumerEnum(IConsumer<Null, int> consumer)
         {
             _consumer = consumer;
         }
 
-        public Ticket Current => _ticket;
+        public TicketDto Current => _ticket;
 
         object IEnumerator.Current => _ticket;
 
@@ -56,7 +56,7 @@ namespace IceWallOwWeb.Support
         {
             var message = _consumer.Consume(TimeSpan.FromSeconds(4));
             if (message == null) return false;
-            var ticket = new Ticket(message.Message.Value)
+            var ticket = new TicketDto(message.Message.Value)
             {
                 Chat = GetChat()
             };
@@ -68,7 +68,7 @@ namespace IceWallOwWeb.Support
         {
             throw new NotImplementedException();
         }
-        private Chat GetChat()
+        private ChatDto GetChat()
         {
             throw new NotImplementedException();
         }

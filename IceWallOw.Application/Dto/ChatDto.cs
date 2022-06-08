@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IceWallOw.Application.Classes
+namespace IceWallOw.Application.Dto
 {
-    public class Chat
+    public class ChatDto
     {
         public int Id { get; set; }
-        public ICollection<string>? Messages { get; set; }
+        public ICollection<Message>? Messages { get; set; }
     }
 }

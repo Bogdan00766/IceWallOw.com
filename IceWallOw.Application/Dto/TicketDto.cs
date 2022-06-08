@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IceWallOw.Application.Classes
+namespace IceWallOw.Application.Dto
 {
-    public class Ticket
+    public class TicketDto
     {
         public int Id { get; }
-        public Chat? Chat { get; set; }
-        public Ticket(int id)
+        public ChatDto? Chat { get; set; }
+        public TicketDto(int id)
         {
             Id = id;
         }
