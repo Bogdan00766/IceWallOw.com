@@ -9,6 +9,7 @@ namespace Domain.IRepositories
 {
     public interface IUserRepository : IRepository<User>
     {
-
+        User FindByEmail(string email);
+        bool CheckPassword(string email, byte[] hash);
     }
 }
