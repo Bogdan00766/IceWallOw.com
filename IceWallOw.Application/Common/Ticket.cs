@@ -9,7 +9,11 @@ namespace IceWallOw.Application.Classes
 {
     public class Ticket
     {
-        public int Id { get; set; }
-        public Chat Chat { get; set; }
+        public int Id { get; }
+        public Chat? Chat { get; set; }
+        public Ticket(int id)
+        {
+            Id = id;
+        }
     }
 }
