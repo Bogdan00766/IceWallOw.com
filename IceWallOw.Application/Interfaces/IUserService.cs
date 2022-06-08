@@ -1,4 +1,5 @@
 ﻿using Domain.Models;
+using IceWallOw.Application.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace IceWallOw.Application.Interfaces
 {
     internal interface IUserService
     {
-        Task<UserDto> Login(string username, string password);
-        Task<bool> Logout(string username, string password);
-        Task<UserDto> Register(User user);
-        Task<bool> ChangePassword(string password);
-        Task<bool> ForgotPassword(string email);
-        Task<bool> ChangeEmail(string email);
+        UserDto Login(string username, string password);
+        Task<bool> Logout(int id);
+        UserDto Register(string name, string lastName, string password, string email);
+        bool ChangePassword(string password);
+        bool ForgotPassword(string email);
+        bool ChangeEmail(string email);
     }
 }

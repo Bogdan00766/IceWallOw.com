@@ -12,7 +12,23 @@ namespace DbInfrastructure.Repositories
     {
         public UserRepository(IceWallOwDbContext dbContext) : base(dbContext)
         {
-            //_dbContext = dbContext;
+        }
+
+        public bool CheckPassword(string email, byte[] hash)
+        {
+            if(email == null) throw new ArgumentNullException("email cannot be null");
+            if(hash == null) throw new ArgumentNullException("hash cannot be null");
+            var user = FindByEmail(email);
+            if(user == null) throw new Exception("User not found");
+
+            if (user.Password == hash) return true;
+            else return false;
+        }
+
+        public User? FindByEmail(string email)
+        {
+            return _dbContext.User.Where(x => x.EMail == email).FirstOrDefault();
+
         }
     }
 }

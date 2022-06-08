@@ -19,9 +19,7 @@ namespace Domain.Models
         [MaxLength(32)]
         public string EMail { get; set; }
         public byte[] Password { get; set; }
-        public byte[] Salt { get; set; }
         public bool IsLogged { get; set; }
         public List<Cart> Cart { get; set; }
-        public List<Address> Addresses { get; set; }
     }
 }
