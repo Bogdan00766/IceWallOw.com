@@ -21,6 +21,7 @@ namespace Domain.Models
         public byte[] Password { get; set; }
         public string AutoLoginGUID { get; set; }
         public DateTime AutoLoginGUIDExpires { get; set; }
+        public short Role { get; set; }
         public List<Cart> Cart { get; set; }
         public List<Chat> Chats { get; set; }
         public List<Message> Messages { get; set; }

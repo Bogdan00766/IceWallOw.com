@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.IRepositories
 {
-    public interface ITicketRepository : IRepository<Ticket>
+    public interface IChatRepository : IRepository<Chat>
     {
-        
+
     }
 }
