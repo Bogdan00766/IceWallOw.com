@@ -14,5 +14,10 @@ namespace DbInfrastructure.Repositories
         {
 
         }
+
+        public Chat? FindByUsers(User user1, User user2)
+        {
+            return _dbContext.Chat.Where(x => x.Users.Contains(user1) && x.Users.Contains(user2)).FirstOrDefault();
+        }
     }
 }

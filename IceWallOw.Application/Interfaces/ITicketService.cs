@@ -11,6 +11,9 @@ namespace IceWallOw.Application.Interfaces
     {
         UserDto? FindUserByGuid(Guid guid);
         TicketDto NewTicket(TicketDto ticket, UserDto user);
-        TicketDto GetTicketById(int id);
+        Task<TicketDto> GetTicketById(int id);
+        ChatDto GetChatById(int id);
+        ChatDto GetChatByUsers(UserDto user1, UserDto user2);
+        ChatDto NewChat(UserDto user1, UserDto user2);
     }
 }

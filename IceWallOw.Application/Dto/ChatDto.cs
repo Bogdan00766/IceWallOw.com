@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.IRepositories
+namespace IceWallOw.Application.Dto
 {
-    public interface IChatRepository : IRepository<Chat>
+    public class ChatDto
     {
-        Chat? FindByUsers(User user1, User user2);
+        public int Id { get; set; }
+        public List<UserDto> Users { get; set; }
+
     }
 }

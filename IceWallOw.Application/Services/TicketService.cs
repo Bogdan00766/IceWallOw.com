@@ -18,7 +18,7 @@ namespace IceWallOw.Application.Services
         private readonly ITicketRepository _ticketRepository;
         private readonly IMapper _mapper;
 
-        public TicketService(IUserRepository userRepository, IChatRepository chatRepository, ITicketRepository ticketRepository IMapper mapper)
+        public TicketService(IUserRepository userRepository, IChatRepository chatRepository, ITicketRepository ticketRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _chatRepository = chatRepository;
@@ -55,5 +55,27 @@ namespace IceWallOw.Application.Services
             
         }
 
+        public ChatDto GetChatById(int id)
+        {
+            return _mapper.Map<ChatDto>(_chatRepository.FindByIdAsync(id));
+        }
+
+        public ChatDto GetChatByUsers(UserDto user1, UserDto user2)
+        {
+            var usr1 = _userRepository.FindByEmail(user1.EMail);
+            var usr2 = _userRepository.FindByEmail(user2.EMail);
+            return _mapper.Map<ChatDto>(_chatRepository.FindByUsers(usr1, usr2));
+        }
+
+        public ChatDto NewChat(UserDto user1, UserDto user2)
+        {
+            Chat chat = new Chat();
+            chat.Users.Add(_userRepository.FindByEmail(user1.EMail));
+            chat.Users.Add(_userRepository.FindByEmail(user2.EMail));
+            chat = _chatRepository.Create(chat);
+            _chatRepository.SaveAsync();
+
+            return _mapper.Map<ChatDto>(chat);
+        }
     }
 }
