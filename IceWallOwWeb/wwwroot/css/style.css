@@ -39,17 +39,93 @@ p{
 #header .navbar-nav .nav-item .nav-link:hover {
     color: var(--txt-red);
 }
+/*HOME*/
+.home .carousel-inner{
+    margin: 0;
+}
+/* section */
+.home .home-banner-1,
+.home .home-banner-2 {
+    background-size: cover;
+    background-position: center;
+    min-height: 600px;
+    position: relative;
+    background-repeat: no-repeat;
+}
+
+.home .home-banner-1 {
+    background-color: blue;
+}
+
+.home .home-banner-2 {
+    background-color: blue;
+}
+
+.home .home-banner-text {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+}
+
+    .home .home-banner-text h1 {
+        font-size: 7rem;
+    }
+
+    .home .home-banner-text h2 {
+        font-size: 5rem;
+    }
+
+.home .btn-danger {
+    padding: 2rem 4rem;
+    border-radius: 5%;
+}
 
 
-@media(max-width: 1024px){
-    
+@media(max-width: 769px) {
+    .home .home-banner-1,
+    .home .home-banner-2 {
+        background-size: cover;
+        background-position: center;
+        min-height: 500px;
+        position: relative;
+        background-repeat: no-repeat;
+    }
+
+    .home .home-banner-text {
+        position: absolute;
+        top: 25%;
+        left: 35%;
+    }
+
+        .home .home-banner-text h1 {
+            font-size: 4rem;
+        }
+
+        .home .home-banner-text h2 {
+            font-size: 2rem;
+        }
+
+    .home .btn-danger {
+        padding: 1rem 2rem
+    }
 }
-@media(max-width: 990px){
-    
-}
-@media(max-width: 769px){
-    
-}
-@media(max-width: 331px){
-    
+
+@media(max-width: 400px) {
+    .home .home-banner-text {
+        position: absolute;
+        top: 15%;
+        left: 25%;
+    }
+
+        .home .home-banner-text h1 {
+            font-size: 3rem;
+        }
+
+        .home .home-banner-text h2 {
+            font-size: 1.5rem;
+        }
+
+    .home .btn-danger {
+        padding: 1rem 2rem
+    }
 }
