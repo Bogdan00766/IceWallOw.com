@@ -10,5 +10,7 @@ namespace IceWallOw.Application.Interfaces
     public interface ITicketService
     {
         UserDto? FindUserByGuid(Guid guid);
+        TicketDto NewTicket(TicketDto ticket, UserDto user);
+        TicketDto GetTicketById(int id);
     }
 }
