@@ -9,6 +9,7 @@ namespace IceWallOw.Application.Interfaces
 {
     public interface IMessageService
     {
-        MessageDto Send(UserDto from, UserDto to, string content);
+        Task<MessageDto> Send(ChatDto chat, string content);
+        Task<List<MessageDto>> GetAllChatMessages(ChatDto chat);
     }
 }

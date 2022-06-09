@@ -11,7 +11,7 @@ namespace IceWallOw.Application.Dto
         public int Id { get; set; }
         public string Content { get; set; }
         public DateTime Date { get; set; }
-        public UserDto SentFrom { get; set; }
+        //public UserDto SentFrom { get; set; }
         public int ChatId { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace IceWallOw.Application.Mappings
             cfg.CreateMap<TicketDto, Ticket>();
             cfg.CreateMap<Chat, ChatDto>();
             cfg.CreateMap<ChatDto, Chat>();
+            cfg.CreateMap<List<Message>, List<MessageDto>> ();
             })
             .CreateMapper();
         
