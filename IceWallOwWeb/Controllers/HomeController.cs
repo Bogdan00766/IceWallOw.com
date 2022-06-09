@@ -22,7 +22,11 @@ namespace IceWallOwWeb.Controllers
         {
             return View();
         }
-        public IActionResult chechout()
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+        public IActionResult Chatbox()
         {
             return View();
         }
