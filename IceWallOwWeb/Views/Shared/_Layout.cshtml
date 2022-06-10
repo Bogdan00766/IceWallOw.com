@@ -4,11 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - IceWallOwWeb</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     
-    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="@Url.Content("~/css/style.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("Styles", false)    
+  
     <script src="https://use.fontawesome.com/74f1a8cbf2.js"></script>
-
+        <meta charset="utf-8">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <!--<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />-->
     <link rel="stylesheet" href="~/IceWallOwWeb.styles.css" asp-append-version="true" />
 </head>
@@ -17,17 +20,23 @@
    <section id="header">
       <nav class="navbar navbar-expand-lg bg-light fixed-top">
         <div class="container">
-          <a class="navbar-brand" href="#">BUGOVSCY</a>
+          <a class="navbar-brand" href="/Home/Index">BUGOVSCY</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#home">Strona główna</a>
+                <a class="nav-link active" aria-current="page" href="/Home/Index">Strona główna</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#koszyk">Koszyk</a>
+                <a class="nav-link" href="/Home/Checkout">Koszyk</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Home/Tickets">Bilety</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Home/Chatbox">Chat</a>
               </li>
               
 

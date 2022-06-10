@@ -1,10 +1,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-
+   *{
+        padding: 0;
 }
 :root{
     --txt-red:#f63440;
@@ -28,6 +26,9 @@ a:hover, a{
 }
 p{
     margin:0;
+}
+#header{
+    margin-bottom:100px;
 }
 #header .navbar-nav .nav-item .nav-link {
     color: var(--txt-black);
@@ -128,4 +129,29 @@ p{
     .home .btn-danger {
         padding: 1rem 2rem
     }
+}
+.products {
+    background-color: rgba(0,0,0,0.5);
+    margin: 20px 50px;
+}
+
+.product {
+    margin: 10px 20px;
+    padding: 10px;
+    border-radius: 5%;
+}
+
+    .product img {
+        border-radius: 10%;
+    }
+
+.ticket {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+}
+.row {
+    margin-top: 100px;
 }
