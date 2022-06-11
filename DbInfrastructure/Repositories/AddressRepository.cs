@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DbInfrastructure.Repositories
 {
-    public class MessageRepository : Repository<Message>, IMessageRepository
+    internal class AddressRepository : Repository<Address>, IAddressRepository
     {
-        public MessageRepository(IceWallOwDbContext dbContext) : base(dbContext)
+        public AddressRepository(IceWallOwDbContext dbContext) : base(dbContext)
         {
-
+            _dbContext = dbContext;
         }
     }
 }

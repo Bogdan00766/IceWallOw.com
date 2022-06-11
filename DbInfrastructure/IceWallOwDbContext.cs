@@ -14,17 +14,10 @@ namespace DbInfrastructure
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<Ticket> Ticket { get; set; }
-        public DbSet<Message> Message { get; set; }
-        public DbSet<Chat> Chat { get; set; }
-
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder
-                .UseSqlite("Data Source=IceWallOwCome.db");
-            
+            optionsBuilder.UseSqlite("Data Source=IceWallOwCome.db");
         }
 
         

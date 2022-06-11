@@ -17,19 +17,44 @@ namespace DbInfrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
 
-            modelBuilder.Entity("ChatUser", b =>
+            modelBuilder.Entity("Domain.Models.Address", b =>
                 {
-                    b.Property<int>("ChatsId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UsersId")
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HomeNumber")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("ChatsId", "UsersId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("ChatUser");
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("Domain.Models.Cart", b =>
@@ -76,45 +101,6 @@ namespace DbInfrastructure.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Domain.Models.Chat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Chat");
-                });
-
-            modelBuilder.Entity("Domain.Models.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ChatId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SentFromId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChatId");
-
-                    b.HasIndex("SentFromId");
-
-                    b.ToTable("Message");
-                });
-
             modelBuilder.Entity("Domain.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -128,10 +114,6 @@ namespace DbInfrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(32)
@@ -141,9 +123,6 @@ namespace DbInfrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("REAL");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -151,40 +130,11 @@ namespace DbInfrastructure.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Domain.Models.Ticket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ChatId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("CreationTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChatId");
-
-                    b.ToTable("Ticket");
-                });
-
             modelBuilder.Entity("Domain.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("AutoLoginGUID")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("AutoLoginGUIDExpires")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("EMail")
                         .IsRequired()
@@ -205,27 +155,24 @@ namespace DbInfrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("BLOB");
 
-                    b.Property<short>("Role")
-                        .HasColumnType("INTEGER");
+                    b.Property<byte[]>("Salt")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
 
                     b.HasKey("Id");
 
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("ChatUser", b =>
+            modelBuilder.Entity("Domain.Models.Address", b =>
                 {
-                    b.HasOne("Domain.Models.Chat", null)
-                        .WithMany()
-                        .HasForeignKey("ChatsId")
+                    b.HasOne("Domain.Models.User", "User")
+                        .WithMany("Addresses")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Models.Cart", b =>
@@ -247,25 +194,6 @@ namespace DbInfrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Models.Message", b =>
-                {
-                    b.HasOne("Domain.Models.Chat", "Chat")
-                        .WithMany("Messages")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Models.User", "SentFrom")
-                        .WithMany("Messages")
-                        .HasForeignKey("SentFromId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Chat");
-
-                    b.Navigation("SentFrom");
-                });
-
             modelBuilder.Entity("Domain.Models.Product", b =>
                 {
                     b.HasOne("Domain.Models.Category", "Category")
@@ -277,32 +205,16 @@ namespace DbInfrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Domain.Models.Ticket", b =>
-                {
-                    b.HasOne("Domain.Models.Chat", "Chat")
-                        .WithMany()
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Chat");
-                });
-
             modelBuilder.Entity("Domain.Models.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Domain.Models.Chat", b =>
-                {
-                    b.Navigation("Messages");
-                });
-
             modelBuilder.Entity("Domain.Models.User", b =>
                 {
-                    b.Navigation("Cart");
+                    b.Navigation("Addresses");
 
-                    b.Navigation("Messages");
+                    b.Navigation("Cart");
                 });
 #pragma warning restore 612, 618
         }
