@@ -28,8 +28,11 @@ namespace IceWallOw.Application.Services
 
         public TicketDto NewTicket(TicketDto ticket, UserDto user)
         {
-            Chat cht = new Chat();
-            cht.Users.Add(_userRepository.FindByEmail(user.EMail));
+            Chat cht = new Chat()
+            {
+                Users = new List<User>() { _userRepository.FindByEmail(user.EMail)  }
+            };
+
             cht = _chatRepository.Create(cht);
 
             Ticket tic = new Ticket()

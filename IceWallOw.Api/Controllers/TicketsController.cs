@@ -24,7 +24,7 @@ namespace IceWallOw.Api.Controllers
             _producer = producer;
             _consumer = consumer;
         }
-        [HttpPost("CreateTicket")]
+        [HttpGet("CreateTicket")]
         public async Task<IActionResult> CreateTicket(string title)
         {
             Guid guid;
@@ -41,14 +41,13 @@ namespace IceWallOw.Api.Controllers
                 return BadRequest();
             if (title.Contains('\'') || title.Contains('\"'))
                 return BadRequest();
-            _logger.LogInformation(0, "Creating token for " + user.Id);
-            _logger.LogError(1, "Creating tokens not implemented");
+            _logger.LogInformation(0, "Creating ticket for " + user.Id);
 
             TicketDto ticket = _ticketService.NewTicket(new TicketDto { Title = title }, user);
 
 
-            _logger.LogInformation(2, $"Received tokenId {ticket.Id} for clientId {user.Id}");
-            _logger.LogInformation(3, $"Sending tokenId {ticket.Id} to broker");
+            _logger.LogInformation(2, $"Received ticketId {ticket.Id} for clientId {user.Id}");
+            _logger.LogInformation(3, $"Sending ticketId {ticket.Id} to broker");
             await _producer.ProduceAsync("Tickets", new Message<Null, int>()
             {
                 Value = (int)ticket.Id
