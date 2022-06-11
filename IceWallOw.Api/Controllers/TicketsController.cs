@@ -27,7 +27,15 @@ namespace IceWallOw.Api.Controllers
         [HttpPost("CreateTicket")]
         public async Task<IActionResult> CreateTicket(string title)
         {
-            var guid = Guid.Parse(Request.Headers["GUID"]);
+            Guid guid;
+            try
+            {
+                guid = Guid.Parse(Request.Headers["GUID"]);
+            }
+            catch (System.ArgumentNullException)
+            {
+                return Unauthorized("GUID cookie cannot null");
+            }
             var user = _ticketService.FindUserByGuid(guid);
             if (user == null)
                 return BadRequest();
