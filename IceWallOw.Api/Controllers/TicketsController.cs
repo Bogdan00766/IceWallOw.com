@@ -33,20 +33,21 @@ namespace IceWallOw.Api.Controllers
 
             throw new NotImplementedException("Pobieranie ticketu nie zostalo zaimplementowane");
 
-            var token = new TicketDto(0)
-            {
-                Chat = new ChatDto(1)
-            };
+            //var token = new TicketDto(0)
+            //{
+            //    Chat = new ChatDto(1)
+            //};
 
 
-            _logger.LogInformation(2, $"Received tokenId {token.Id} for clientId {user.Id}");
-            _logger.LogInformation(3, $"Sending tokenId {token.Id} to broker");
-            await _producer.ProduceAsync("Tickets", new Message<Null, int>()
-            {
-                Value = token.Id
-            });
-            _producer.Flush();
-            return Ok(token);
+            //_logger.LogInformation(2, $"Received tokenId {token.Id} for clientId {user.Id}");
+            //_logger.LogInformation(3, $"Sending tokenId {token.Id} to broker");
+            //await _producer.ProduceAsync("Tickets", new Message<Null, int>()
+            //{
+            //    Value = token.Id
+            //});
+            //_producer.Flush();
+            //return Ok(token);
+            return StatusCode(499);
         }
 
         [HttpPost("GetNewTicket")]
@@ -55,11 +56,12 @@ namespace IceWallOw.Api.Controllers
             _consumer.Subscribe("Tickets");
             var message = await Task.Run(() => _consumer.Consume(TimeSpan.FromSeconds(10)));
             if (message == null) return NoContent();
-            var token = new TicketDto(message.Message.Value)
-            {
-                Chat = new ChatDto(0)
-            };
-            return Ok(token);
+            //var token = new TicketDto(message.Message.Value)
+            //{
+            //    Chat = new ChatDto(0)
+            //};
+            //return Ok(token);
+            return StatusCode(499);
         }
     }
 }

@@ -18,6 +18,14 @@ builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<IChatRepository, ChatRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+//builder.Services.AddScoped<ILogger, Logger<>>();
+
 
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
@@ -43,11 +51,9 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
-{
-    
+{ 
     app.UseSwagger();
-    app.UseSwaggerUI();
-    
+    app.UseSwaggerUI();   
 }
 
 app.UseHttpsRedirection();
@@ -55,3 +61,5 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
+
+

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.IRepositories
 {
-    internal interface ITicketRepository : IRepository<Ticket>
+    public interface ITicketRepository : IRepository<Ticket>
     {
         
     }

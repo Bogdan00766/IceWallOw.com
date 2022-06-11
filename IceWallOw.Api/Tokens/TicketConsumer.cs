@@ -32,8 +32,8 @@ namespace IceWallOw.Api.Tokens
     internal class TicketConsumerEnum : IEnumerator<TicketDto>
     {
         private readonly IConsumer<Null, int> _consumer;
-        private TicketDto _ticket = new TicketDto(-1);
-
+        //private TicketDto _ticket = new TicketDto(-1);
+        private TicketDto _ticket = new TicketDto();
         public TicketConsumerEnum(IConsumer<Null, int> consumer)
         {
             _consumer = consumer;
@@ -56,11 +56,11 @@ namespace IceWallOw.Api.Tokens
         {
             var message = _consumer.Consume(TimeSpan.FromSeconds(4));
             if (message == null) return false;
-            var ticket = new TicketDto(message.Message.Value)
-            {
-                Chat = GetChat()
-            };
-            _ticket = ticket;
+            //var ticket = new TicketDto(message.Message.Value)
+            //{
+            //    Chat = GetChat()
+            //};
+            //_ticket = ticket;
             return true;
         }
 

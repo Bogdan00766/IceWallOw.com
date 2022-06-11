@@ -60,12 +60,11 @@ namespace IceWallOw.Api.Controllers
 
             var resp = new HttpResponseMessage();
 
-            Guid id = Guid.NewGuid();
-            _userService.SetGuid(id, user.Id);
-            HttpContext.Response.Cookies.Append("GUID",id.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
+            Guid guid = Guid.NewGuid();
+            _userService.SetGuid(guid, user.Id);
+            HttpContext.Response.Cookies.Append("GUID",guid.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
             {
                 Expires = DateTime.Now.AddDays(1),
-                // every othe options like path , ...
             });
 
             return Ok(user);
