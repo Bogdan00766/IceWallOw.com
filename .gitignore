@@ -363,5 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #SQLite files
-*.db-shm
-*.db-wal
+IceWallOw.Api/*.db-shm
+IceWallOw.Api/*.db-wal
