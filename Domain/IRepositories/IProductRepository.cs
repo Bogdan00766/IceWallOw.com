@@ -9,6 +9,5 @@ namespace Domain.IRepositories
 {
     public interface IProductRepository : IRepository<Product>
     {
-        public Task<List<Product>> FindByName(string name);
     }
 }

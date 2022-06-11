@@ -1,4 +1,3 @@
-
 ﻿using Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -6,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IceWallOw.Application.Dto
+namespace Domain.IRepositories
 {
-    public class ChatDto
+    public interface IAddressRepository : IRepository<Address>
     {
-        public int Id { get; set; }
-        public List<UserDto> Users { get; set; }
+
     }
 }

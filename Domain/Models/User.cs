@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 namespace Domain.Models
 {
     public class User : Entity
-    {        
+    {
+        //TODO dodać kolumny dla tabeli
         [MaxLength(32)]
         public string Name { get; set; }
         [MaxLength(32)]
@@ -19,11 +20,9 @@ namespace Domain.Models
         [MaxLength(32)]
         public string EMail { get; set; }
         public byte[] Password { get; set; }
-        public string? AutoLoginGUID { get; set; }
-        public DateTime? AutoLoginGUIDExpires { get; set; }
-        public short Role { get; set; }
+        public byte[] Salt { get; set; }
+
         public List<Cart> Cart { get; set; }
-        public List<Chat> Chats { get; set; }
-        public List<Message> Messages { get; set; }
+        public List<Address> Addresses { get; set; }
     }
 }
