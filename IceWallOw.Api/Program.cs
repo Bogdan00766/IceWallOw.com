@@ -7,8 +7,7 @@ using IceWallOw.Application.Mappings;
 using IceWallOw.Application.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using System.Web.Http;
-using System.Web.Http.SelfHost;
+
 
 
 
