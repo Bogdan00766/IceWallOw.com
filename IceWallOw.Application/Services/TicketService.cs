@@ -49,7 +49,16 @@ namespace IceWallOw.Application.Services
 
         public async Task<TicketDto> GetTicketById(int id)
         {
-            return _mapper.Map<TicketDto>(await _ticketRepository.FindByIdAsync(id));
+            var ticket = _mapper.Map<TicketDto>(await _ticketRepository.FindByIdAsync(id));
+            return ticket;
+        }
+        public async Task<TicketDto> ClaimTicketById(int id, UserDto user)
+        {
+            var ticket = await _ticketRepository.FindByIdAsync(id);
+            var userDb = await _userRepository.FindByIdAsync(user.Id);
+            ticket.Chat.Users.Add(userDb);
+            _ticketRepository.Update(ticket);
+            return await GetTicketById(id);
         }
 
         public UserDto FindUserByGuid(Guid guid)

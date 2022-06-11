@@ -46,8 +46,8 @@ namespace IceWallOw.Api.Controllers
             TicketDto ticket = _ticketService.NewTicket(new TicketDto { Title = title }, user);
 
 
-            _logger.LogInformation(2, $"Received ticketId {ticket.Id} for clientId {user.Id}");
-            _logger.LogInformation(3, $"Sending ticketId {ticket.Id} to broker");
+            _logger.LogInformation(1, $"Received ticketId {ticket.Id} for clientId {user.Id}");
+            _logger.LogInformation(2, $"Sending ticketId {ticket.Id} to broker");
             await _producer.ProduceAsync("Tickets", new Message<Null, int>()
             {
                 Value = (int)ticket.Id
@@ -56,18 +56,32 @@ namespace IceWallOw.Api.Controllers
             return Ok(ticket);
         }
 
-        [HttpPost("GetNewTicket")]
-        public async Task<IActionResult> GetNewTicket()
+        [HttpPost("GetNextTicket")]
+        public async Task<IActionResult> GetNextTicket()
         {
-            _consumer.Subscribe("Tickets");
+            Guid guid;
+            try
+            {
+                guid = Guid.Parse(Request.Headers["GUID"]);
+            }
+            catch (System.ArgumentNullException)
+            {
+                return Unauthorized("GUID cookie cannot null");
+            }
+            var user = _ticketService.FindUserByGuid(guid);
+            if (user == null)
+                return Unauthorized();
             var message = await Task.Run(() => _consumer.Consume(TimeSpan.FromSeconds(10)));
-            if (message == null) return NoContent();
-            //var token = new TicketDto(message.Message.Value)
-            //{
-            //    Chat = new ChatDto(0)
-            //};
-            //return Ok(token);
-            return StatusCode(499);
+            if (message == null)
+            {
+                _logger.LogInformation(0, $"User {user.Id} tried to pull new ticket, but find none");
+                return NoContent();
+            }
+            _logger.LogDebug("User " + user.Id);
+            var ticket = await _ticketService.GetTicketById(message.Message.Value);
+            if (ticket == null) return StatusCode(500);
+            _logger.LogInformation(1, $"User {user.Id} pulled ticket {ticket.Id}");
+            return Ok(ticket);
         }
     }
 }

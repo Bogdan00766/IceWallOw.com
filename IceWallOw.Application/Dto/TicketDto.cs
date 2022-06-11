@@ -10,7 +10,7 @@ namespace IceWallOw.Application.Dto
     {
         public int? Id { get; set; }
         public string Title { get; set; }
-        public int? ChatId { get; set; }
+        public ChatDto Chat { get; set; }
 
     }
 }
