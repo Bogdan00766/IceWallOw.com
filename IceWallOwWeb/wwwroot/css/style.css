@@ -1,0 +1,157 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+   *{
+        padding: 0;
+}
+:root{
+    --txt-red:#f63440;
+    --bg-light-white:#f5f5f5;
+    --main-font: "Poppins", sans-serif;
+    --txt-black: #121212;
+    --txt-gray: #ababab;
+    --txt-dark-gray: #797979;
+}
+body {
+    font-family: var(--main-font);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+    background: var(--bg-white);
+    color: var(--text-black);
+    overflow-x: hidden;
+}
+a:hover, a{
+    text-decoration: none;
+}
+p{
+    margin:0;
+}
+#header{
+    margin-bottom:100px;
+}
+#header .navbar-nav .nav-item .nav-link {
+    color: var(--txt-black);
+    text-align: center;
+    padding: .25rem 1.9rem;
+}
+
+#header .navbar-nav .nav-item .nav-link:active,
+#header .navbar-nav .nav-item .nav-link:hover {
+    color: var(--txt-red);
+}
+/*HOME*/
+.home .carousel-inner{
+    margin: 0;
+}
+/* section */
+.home .home-banner-1,
+.home .home-banner-2 {
+    background-size: cover;
+    background-position: center;
+    min-height: 600px;
+    position: relative;
+    background-repeat: no-repeat;
+}
+
+.home .home-banner-1 {
+    background-color: blue;
+}
+
+.home .home-banner-2 {
+    background-color: blue;
+}
+
+.home .home-banner-text {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+}
+
+    .home .home-banner-text h1 {
+        font-size: 7rem;
+    }
+
+    .home .home-banner-text h2 {
+        font-size: 5rem;
+    }
+
+.home .btn-danger {
+    padding: 2rem 4rem;
+    border-radius: 5%;
+}
+
+
+@media(max-width: 769px) {
+    .home .home-banner-1,
+    .home .home-banner-2 {
+        background-size: cover;
+        background-position: center;
+        min-height: 500px;
+        position: relative;
+        background-repeat: no-repeat;
+    }
+
+    .home .home-banner-text {
+        position: absolute;
+        top: 25%;
+        left: 35%;
+    }
+
+        .home .home-banner-text h1 {
+            font-size: 4rem;
+        }
+
+        .home .home-banner-text h2 {
+            font-size: 2rem;
+        }
+
+    .home .btn-danger {
+        padding: 1rem 2rem
+    }
+}
+
+@media(max-width: 400px) {
+    .home .home-banner-text {
+        position: absolute;
+        top: 15%;
+        left: 25%;
+    }
+
+        .home .home-banner-text h1 {
+            font-size: 3rem;
+        }
+
+        .home .home-banner-text h2 {
+            font-size: 1.5rem;
+        }
+
+    .home .btn-danger {
+        padding: 1rem 2rem
+    }
+}
+.products {
+    background-color: rgba(0,0,0,0.5);
+    margin: 20px 50px;
+}
+
+.product {
+    margin: 10px 20px;
+    padding: 10px;
+    border-radius: 5%;
+}
+
+    .product img {
+        border-radius: 10%;
+    }
+
+.ticket {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+}
+.row {
+    margin-top: 100px;
+}
