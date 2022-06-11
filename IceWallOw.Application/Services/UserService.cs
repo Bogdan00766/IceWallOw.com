@@ -85,6 +85,7 @@ namespace IceWallOw.Application.Services
                 LastName = lastName,
                 Password = hash,
                 EMail = email,
+                Role = 0,
             };
             
             var usr = _userRepository.Create(user);
