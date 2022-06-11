@@ -11,7 +11,7 @@ namespace DbInfrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
-        protected IceWallOwDbContext _dbContext;
+        protected readonly IceWallOwDbContext _dbContext;
         public Repository(IceWallOwDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -44,6 +44,15 @@ namespace DbInfrastructure.Repositories
             _dbContext.Entry(e).State = EntityState.Modified;
             _dbContext.Update(e);
             return e;
+        }
+        public async void SaveAsync()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async void DisposeAsync()
+        {
+            await _dbContext.DisposeAsync();
         }
     }
 }

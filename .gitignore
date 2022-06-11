@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+#SQLite files
+IceWallOw.Api/*.db-shm
+IceWallOw.Api/*.db-wal

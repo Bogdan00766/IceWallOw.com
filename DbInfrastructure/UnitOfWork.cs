@@ -21,8 +21,6 @@ namespace DbInfrastructure
 
         public IUserRepository UserRepository => new UserRepository(_dbContext);
 
-        public IAddressRepository AddressRepository => new AddressRepository(_dbContext);
-
         public UnitOfWork()
         {
             _dbContext = new IceWallOwDbContext();
