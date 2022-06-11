@@ -8,9 +8,6 @@ using IceWallOw.Application.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
-
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -26,6 +23,9 @@ builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<IChatRepository, ChatRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+//builder.Services.AddScoped<ILogger, Logger<>>();
+
 
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 

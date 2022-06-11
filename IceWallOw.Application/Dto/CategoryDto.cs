@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace IceWallOw.Application.Dto
 {
-    public class Message
+    public class CategoryDto
     {
-        public string Text { get; set; }
-        public DateTime SendTime { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -14,14 +14,15 @@ namespace IceWallOw.Application.Mappings
         public static IMapper Initialize()
             => new MapperConfiguration(cfg =>
             {
-            cfg.CreateMap<Product, ProductDto>();
-            cfg.CreateMap<CreateProductDto, Product>();
-            cfg.CreateMap<User, UserDto>();
-            cfg.CreateMap<Ticket, TicketDto>();
-            cfg.CreateMap<TicketDto, Ticket>();
-            cfg.CreateMap<Chat, ChatDto>();
-            cfg.CreateMap<ChatDto, Chat>();
-            cfg.CreateMap<Message, MessageDto> ();
+                cfg.CreateMap<Product, ProductDto>();
+                cfg.CreateMap<CreateProductDto, Product>();
+                cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<Ticket, TicketDto>();
+                cfg.CreateMap<TicketDto, Ticket>();
+                cfg.CreateMap<Chat, ChatDto>();
+                cfg.CreateMap<ChatDto, Chat>();
+                cfg.CreateMap<Message, MessageDto> ();
+                cfg.CreateMap<Category, CategoryDto>();
             })
             .CreateMapper();
         
