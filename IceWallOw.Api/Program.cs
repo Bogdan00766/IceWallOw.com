@@ -1,4 +1,5 @@
 using Confluent.Kafka;
+using Confluent.Kafka.Admin;
 using DbInfrastructure;
 using DbInfrastructure.Repositories;
 using Domain.IRepositories;
@@ -39,7 +40,27 @@ builder.Services.AddSingleton<IProducer<Null, int>>(new ProducerBuilder<Null, in
 {
     BootstrapServers = "kafka:29092"
 }).Build());
-
+//kafka setup
+using(var adminClient = new AdminClientBuilder(new AdminClientConfig { BootstrapServers = "kafka:29092" }).Build())
+{
+    try
+    {
+        if(adminClient.GetMetadata(TimeSpan.FromSeconds(5)).Topics.Where(x => x.Topic == "Tickets").FirstOrDefault() == null)
+            adminClient.CreateTopicsAsync(new TopicSpecification[]
+            {
+                new TopicSpecification
+                {
+                    Name = "Tickets",
+                    ReplicationFactor = 1,
+                    NumPartitions = 1
+                }
+            });
+    }
+    catch(CreateTopicsException e)
+    {
+        throw e;
+    }
+}
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
