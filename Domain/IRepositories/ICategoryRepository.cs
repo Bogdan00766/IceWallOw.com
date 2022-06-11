@@ -9,6 +9,6 @@ namespace Domain.IRepositories
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-        public Task<List<Category>> FindByName(string name);
+        public Task<Category> FindByNameAsync(string name);
     }
 }

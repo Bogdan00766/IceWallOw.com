@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.IRepositories
 {
-    public interface IAddressRepository : IRepository<Address>
+    internal interface ITicketRepository : IRepository<Ticket>
     {
-
+        
     }
 }

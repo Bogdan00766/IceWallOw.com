@@ -23,7 +23,7 @@ services:
     image: ${DOCKER_REGISTRY-}icewallowweb
     build:
       context: .
-      dockerfile: IceWallOwWeb/Dockerfile
+      dockerfile: IceWallOw.Api/Dockerfile
     depends_on:
       - zookeeper
       - kafka
