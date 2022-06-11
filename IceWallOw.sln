@@ -18,7 +18,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceWallOwWeb", "IceWallOwWeb\IceWallOwWeb.csproj", "{3CA0A2E4-7FE0-4501-9392-9AA6B191F29C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceWallOw.Application", "IceWallOw.Application\IceWallOw.Application.csproj", "{71C7BE7C-E8FD-4C7F-9613-464931073EB2}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp2", "..\TestApp2\TestApp2.csproj", "{C2FBCA1C-F7D0-45A4-984C-3FF12C8133B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
