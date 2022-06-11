@@ -1,3 +1,4 @@
+using Confluent.Kafka;
 using DbInfrastructure;
 using DbInfrastructure.Repositories;
 using Domain.IRepositories;
@@ -29,6 +30,17 @@ builder.Services.AddScoped<IChatRepository, ChatRepository>();
 
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
+builder.Services.AddSingleton<IConsumer<Null, int>>(new ConsumerBuilder<Null, int>(new ConsumerConfig()
+    {
+        BootstrapServers = "kafka:29092",
+        GroupId = "Consumers",
+        AutoOffsetReset = AutoOffsetReset.Earliest
+    }).Build());
+builder.Services.AddSingleton<IProducer<Null, int>>(new ProducerBuilder<Null, int>(new ProducerConfig()
+{
+    BootstrapServers = "kafka:29092"
+}).Build());
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -40,11 +52,9 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
-{
-    
+{ 
     app.UseSwagger();
-    app.UseSwaggerUI();
-    
+    app.UseSwaggerUI();   
 }
 
 app.UseHttpsRedirection();

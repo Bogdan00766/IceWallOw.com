@@ -1,3 +1,4 @@
+
 ﻿using Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,5 @@ namespace IceWallOw.Application.Dto
     {
         public int Id { get; set; }
         public List<UserDto> Users { get; set; }
-
     }
 }
