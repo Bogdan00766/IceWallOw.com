@@ -30,18 +30,23 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddSingleton(AutoMapperConfig.Initialize());
 
-builder.Services.AddSingleton<IConsumer<Null, int>>(new ConsumerBuilder<Null, int>(new ConsumerConfig()
-    {
-        BootstrapServers = "kafka:29092",
-        GroupId = "Consumers",
-        AutoOffsetReset = AutoOffsetReset.Earliest
-    }).Build());
 builder.Services.AddSingleton<IProducer<Null, int>>(new ProducerBuilder<Null, int>(new ProducerConfig()
 {
     BootstrapServers = "kafka:29092"
 }).Build());
+builder.Services.AddSingleton<IConsumer<Null, int>>(x =>
+{
+    var consumer = new ConsumerBuilder<Null, int>(new ConsumerConfig()
+    {
+        BootstrapServers = "kafka:29092",
+        GroupId = "Consumers",
+        AutoOffsetReset = AutoOffsetReset.Earliest,
+    }).Build();
+    consumer.Subscribe("Tickets");
+    return consumer;
+});
 //kafka setup
-using(var adminClient = new AdminClientBuilder(new AdminClientConfig { BootstrapServers = "kafka:29092" }).Build())
+using (var adminClient = new AdminClientBuilder(new AdminClientConfig { BootstrapServers = "kafka:29092" }).Build())
 {
     try
     {
