@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using IceWallOw.Application.Dto;
 using IceWallOw.Application.Interfaces;
+using Domain.Models;
 
 namespace IceWallOw.Api.Controllers
 {
@@ -24,30 +25,36 @@ namespace IceWallOw.Api.Controllers
             _consumer = consumer;
         }
         [HttpPost("CreateTicket")]
-        public async Task<IActionResult> CreateTicket()
+        public async Task<IActionResult> CreateTicket(string title)
         {
-            var guid = Guid.Parse(Request.Headers["GUID"]);
+            Guid guid;
+            try
+            {
+                guid = Guid.Parse(Request.Headers["GUID"]);
+            }
+            catch (System.ArgumentNullException)
+            {
+                return Unauthorized("GUID cookie cannot null");
+            }
             var user = _ticketService.FindUserByGuid(guid);
+            if (user == null)
+                return BadRequest();
+            if (title.Contains('\'') || title.Contains('\"'))
+                return BadRequest();
             _logger.LogInformation(0, "Creating token for " + user.Id);
             _logger.LogError(1, "Creating tokens not implemented");
 
-            throw new NotImplementedException("Pobieranie ticketu nie zostalo zaimplementowane");
-
-            //var token = new TicketDto(0)
-            //{
-            //    Chat = new ChatDto(1)
-            //};
+            TicketDto ticket = _ticketService.NewTicket(new TicketDto { Title = title }, user);
 
 
-            //_logger.LogInformation(2, $"Received tokenId {token.Id} for clientId {user.Id}");
-            //_logger.LogInformation(3, $"Sending tokenId {token.Id} to broker");
-            //await _producer.ProduceAsync("Tickets", new Message<Null, int>()
-            //{
-            //    Value = token.Id
-            //});
-            //_producer.Flush();
-            //return Ok(token);
-            return StatusCode(499);
+            _logger.LogInformation(2, $"Received tokenId {ticket.Id} for clientId {user.Id}");
+            _logger.LogInformation(3, $"Sending tokenId {ticket.Id} to broker");
+            await _producer.ProduceAsync("Tickets", new Message<Null, int>()
+            {
+                Value = (int)ticket.Id
+            });
+            _producer.Flush();
+            return Ok(ticket);
         }
 
         [HttpPost("GetNewTicket")]
