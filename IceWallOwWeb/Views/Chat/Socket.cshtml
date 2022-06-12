@@ -16,6 +16,8 @@
             Content;
             Date;
             ChatId;
+            OwnerGuid;
+            Owner;
         }
     </script>
 </head>
@@ -112,6 +114,7 @@
             let message = new Message();
             message.Content = sendMessage.value;
             message.ChatId = @Model.ChatId;
+            message.OwnerGuid = @Model.Guid;
             return JSON.stringify(message);
         }
 
@@ -156,7 +159,7 @@
                 commsLog.innerHTML += '<tr>' +
                     '<td class="commslog-server">Server</td>' +
                     '<td class="commslog-client">Client</td>' +
-                    '<td class="commslog-data">' + htmlEscape('ID: ' + message.Id + ' on chat ' + message.ChatId + ' date ' + message.Date + ' wrote: ' + message.Content) 
+                    '<td class="commslog-data">' + htmlEscape('ID: ' + message.Id + ' by ' + message.Owner + ' on chat ' + message.ChatId + ' date ' + message.Date + ' wrote: ' + message.Content) 
                     + '</td></tr>';
             };
         };
