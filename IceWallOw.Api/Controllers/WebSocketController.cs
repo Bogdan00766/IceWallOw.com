@@ -18,12 +18,24 @@ namespace IceWallOw.Api.Controllers
             {
                 ReceiveResult = _receiveResult;
                 string result = Encoding.UTF8.GetString(message);
-                if(result != null)
-                    Message = JsonConvert.DeserializeObject<MessageDto>(result);
+                MessageDto? mes;
+                    mes = JsonConvert.DeserializeObject<MessageDto>(result);
+                if (mes != null)
+                {
+                    if (mes.Content == null || mes.Content == String.Empty)
+                        return;
+                    Message = new MessageDto()
+                    {
+                        ChatId = mes.ChatId,
+                        Content = mes.Content,
+                        Date = DateTime.Now,
+                        Id = 2
+                };
+            }
             }
             public override string ToString()
             {
-                return (Message == null) ? null : Message.Content;
+                return (Message == null) ? String.Empty : Message.Content;
             }
         }
         private WebSocket? _webSocket;
