@@ -41,6 +41,13 @@ namespace IceWallOw.Application.Services
             throw new NotImplementedException();
         }
 
+        public bool IsLogged(Guid guid)
+        {
+            var user = _userRepository.FindUserByGUID(guid);
+            if (user == null) return false;
+            return true;
+        }
+
         public UserDto Login(string email, string password)
         {
             if (email == null) throw new Exception("Email cannot be null");

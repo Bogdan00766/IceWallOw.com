@@ -16,7 +16,7 @@ namespace IceWallOw.Application.Interfaces
         void SetGuid(Guid id, int userId);
         bool ChangePassword(int id, string newpassword);
         bool ForgotPassword(string email);
-        
+        bool IsLogged(Guid guid);
         UserDto FindByGuid(Guid guid);
     }
 }

@@ -95,6 +95,24 @@ namespace IceWallOw.Api.Controllers
             }
         }
 
+        [HttpGet("isLogged")]
+        public IActionResult IsLogged()
+        {
+            var guidString = Request.Cookies["GUID"];
+            Guid guid;
+            try
+            {
+                guid = Guid.Parse(guidString);
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical($"Error while parsing guid: {guidString}");
+                return BadRequest("Error while parsing guid");
+            }
+            if (_userService.IsLogged(guid)) return Ok(true);
+            return Unauthorized(false);
+        }
+
         [HttpDelete]
         public void Set(string key, string value, int? expireTime)
         {
