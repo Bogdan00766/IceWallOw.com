@@ -70,6 +70,46 @@ namespace IceWallOwWeb.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> RegisterPageAsync()
+        {
+            var cock = Request.Cookies["GUID"];
+            if (await IsLoggedAsync(cock))
+            {
+                return Unauthorized("User is already logged");
+            }
+
+            HttpClient client = new HttpClient();
+
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> RegisterPageAsync(RegisterUserDto person)
+        {
+          
+
+            HttpClient client = new HttpClient();
+            string queryString = $"http://localhost:5000/Api/Users/Register";
+
+            var json = System.Text.Json.JsonSerializer.Serialize(person);
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(queryString, stringContent);
+            var statusCode = response.StatusCode;
+            var body = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var user = System.Text.Json.JsonSerializer.Deserialize<UserDto>(body);
+
+                return RedirectToAction("LoginPage", "Home");
+            }
+            else
+            {
+                ViewData["body_response"] = body;
+                return View();
+            }
+        }
 
         public async Task<IActionResult> LoginPageAsync()
         {
@@ -159,6 +199,7 @@ namespace IceWallOwWeb.Controllers
 
             
         }
+
         async Task<bool> IsLoggedAsync(String guid)
         {
             string queryString = $"http://localhost:5000/api/Users/isLogged";
