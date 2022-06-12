@@ -1,7 +1,11 @@
 ﻿using IceWallOw.Application.Dto;
 using IceWallOwWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Linq;
+using System.Net;
+using System.Text;
 
 namespace IceWallOwWeb.Controllers
 {
@@ -19,7 +23,7 @@ namespace IceWallOwWeb.Controllers
 
             HttpClient client = new HttpClient();
             //$...../id={
-            string queryString = "https://localhost:7053/api/Products?";
+            string queryString = "http://localhost:5000/api/Products?";
             if (name != null) queryString = queryString + $"name={name}&";
             if (location != null) queryString = queryString + $"location={location}&";
             if (distance != null) queryString = queryString + $"distance={distance}&";
@@ -43,7 +47,7 @@ namespace IceWallOwWeb.Controllers
         public async Task<IActionResult> ProductDescAsync(int id)
         {
             HttpClient client = new HttpClient();
-            string queryString = $"https://localhost:7053/api/Products/{id}";
+            string queryString = $"http://localhost:5000/api/Products/{id}";
 
             var response = await client.GetAsync(queryString);
             var statusCode = response.StatusCode;
@@ -67,9 +71,110 @@ namespace IceWallOwWeb.Controllers
             return View();
         }
 
-        public IActionResult LoginPage()
+        public async Task<IActionResult> LoginPageAsync()
         {
+
+            var cock = Request.Cookies["GUID"];
+            if (await IsLoggedAsync(cock))
+            {
+                return Unauthorized("User is already logged");
+            }
+
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> LogoutPageAsync()
+        {
+            var cock = Request.Cookies["GUID"];
+            if (!(await IsLoggedAsync(cock)))
+            {
+                return Unauthorized("User is not already logged");
+            }
+
+            string queryString = $"http://localhost:5000/api/Users/Logout";
+            CookieContainer cookies = new CookieContainer();
+            HttpClientHandler handler = new HttpClientHandler();
+
+            handler.CookieContainer = cookies;
+
+            HttpClient client = new HttpClient(handler);
+
+            cookies.Add(new Uri("http://localhost:5000"), new Cookie("GUID", cock));
+            var response = await client.GetAsync(queryString);
+            var statusCode = response.StatusCode;
+            var body = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return BadRequest(body);
+            }
+
+
+        }
+
+
+            [HttpPost]
+        public async Task<IActionResult> LoginPageAsync(LoginUserDto person)
+        {
+            string email = person.EMail;
+            string password = person.Password;
+            CookieContainer cookies = new CookieContainer();
+            HttpClientHandler handler = new HttpClientHandler();
+
+            handler.CookieContainer = cookies;
+            
+            HttpClient client = new HttpClient(handler);
+            string queryString = $"http://localhost:5000/Api/Users/Login";
+
+            var json = System.Text.Json.JsonSerializer.Serialize(person);
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(queryString,stringContent);
+            var statusCode = response.StatusCode;
+            var body = await response.Content.ReadAsStringAsync();
+            
+            if(response.IsSuccessStatusCode)
+            {
+                var user = System.Text.Json.JsonSerializer.Deserialize<UserDto>(body);
+
+                Uri uri = new Uri(queryString);
+                var responseCookies = cookies.GetCookies(uri).Cast<Cookie>();
+                HttpContext.Response.Cookies.Append("GUID", responseCookies.Where(x => x.Name=="GUID").FirstOrDefault().Value, new Microsoft.AspNetCore.Http.CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(1),
+                });
+
+                return RedirectToAction("Index","Home");
+            }
+            else
+            {
+                ViewData["body_response"] = body;
+                return View();
+                //return BadRequest(body);
+            }
+
+            
+        }
+        async Task<bool> IsLoggedAsync(String guid)
+        {
+            string queryString = $"http://localhost:5000/api/Users/isLogged";
+            CookieContainer cookies = new CookieContainer();
+            HttpClientHandler handler = new HttpClientHandler();
+
+            handler.CookieContainer = cookies;
+
+            HttpClient client = new HttpClient(handler);
+
+            cookies.Add(new Uri("http://localhost:5000"), new Cookie("GUID",guid));
+            var response = await client.GetAsync(queryString);
+            var statusCode = response.StatusCode;
+            var body = await response.Content.ReadAsStringAsync();
+
+            return bool.Parse(body);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

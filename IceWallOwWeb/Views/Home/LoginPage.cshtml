@@ -1,4 +1,32 @@
-﻿<section class="vh-60">
+﻿@model IceWallOw.Application.Dto.LoginUserDto
+@ViewData["body_response"] 
+@using (Html.BeginForm("LoginPage", "Home", FormMethod.Post))
+ {
+        
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Person Details</th>
+            </tr>
+            <tr>
+                <td>PersonId: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.EMail)
+                </td>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Password)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"/></td>
+            </tr>
+        </table>
+    }
+
+@*<section class="vh-60">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6 text-black">
@@ -10,22 +38,22 @@
     
             <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
     
-              <form style="width: 23rem;">
+              <form style="width: 23rem;" method="post">
     
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
     
                 <div class="form-outline mb-4">
-                  <input type="email" id="form2Example18" class="form-control form-control-lg" />
-                  <label class="form-label" for="form2Example18">Email address</label>
+                  <input type="text" class="form-control form-control-lg" name="Email"/>
+                  <label class="form-label" for="form2Example18" >Email address</label>
                 </div>
     
                 <div class="form-outline mb-4">
-                  <input type="password" id="form2Example28" class="form-control form-control-lg" />
+                  <input type="password" name="Password" class="form-control form-control-lg" />
                   <label class="form-label" for="form2Example28">Password</label>
                 </div>
     
                 <div class="pt-1 mb-4">
-                  <button class="btn btn-info btn-lg btn-block" type="button">Login</button>
+                  <button class="btn btn-info btn-lg btn-block" type="submit">Login</button>
                 </div>
     
                 <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
@@ -42,4 +70,4 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>*@
