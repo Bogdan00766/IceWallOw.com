@@ -1,99 +1,56 @@
-﻿@{
+﻿
+@model List<IceWallOw.Application.Dto.ProductDto>
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-    <!-- Home -->
-      <!-- 
-    <section id="home" class="home pt-5 overflow-hidden">
-
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-         </div>
-        <div class="carousel-inner">
-
-          <div class="carousel-item active">
-            <div class="home-banner home-banner-1">
-              <div class="home-banner-text">
-                <h1>Kobiety</h1>
-                <a href="#" class="btn btn-danger text-uppercase mt-4">Produkty</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="home-banner home-banner-2">
-              <div class="home-banner-text">
-                <h1>Faceci</h1>
-                <a href="#" class="btn btn-danger text-uppercase mt-4">Bydgoszcz</a>
-              </div>
-            </div>
-          </div>
-
+      <div class="row"> 
+        <div class="col-lg-3 form-filter">
+            <h3>Filtrowanie danych</h3>
+            <input class="form-control me-2"  placeholder="Nazwa produktu" aria-label="Search" id="name">
+            <input class="form-control me-2"  placeholder="Cena minimalna" aria-label="Search" id="priceMin">
+            <input class="form-control me-2"  placeholder="Cena maksymalna" aria-label="Search" id="priceMax">
+            <button class="btn btn-outline-success" type="submit" onclick="processData()">Search</button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true">
-              <span class="ti-angle-left slider-icon"></span>
-          </span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true">
-            <span class="ti-angle-right slider-icon"></span>
-          </span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+        <div class="col-lg-9">
+    @*
+<form action="/action_page.php" method="post">
+  <input type="text" id="@product.Name" name="fname"><br><br>
+  <input type="submit" value="Submit">
+</form>*@
 
-    </section>-->
-      <div class="row products"> 
+    
     <h1>Produkty</h1>
+    <div class="row products"> 
+@foreach (var product in Model)
+{
+    
     <div class="card product" style="width: 18rem;">
-      <img class="card-img-top" src="/images/car.jpg" alt="Card image cap"/>
+      <img class="card-img-top" src="@product.PhotoPath" alt="Card image cap"/>
         <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">@product.Name</h5>
+        <p class="card-text">@product.Description</p>
+        <p class="card-text">@product.Price zł</p>
+        <p class="card-text">@product.CategoryName</p>
+        <p class="card-text">@product.Location</p>
+        <a href="/Home/ProductDesc?id=@product.Id" class="btn btn-primary">Opis produktu</a>
+        </div>
       </div>
-    </div>
+    
 
-    <div class="card product" style="width: 18rem;">
-      <img class="card-img-top" src="/images/car.jpg" alt="Card image cap"/>
-        <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card product" style="width: 18rem;">
-      <img class="card-img-top" src="/images/car.jpg" alt="Card image cap"/>
-        <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card product" style="width: 18rem;">
-      <img class="card-img-top" src="/images/car.jpg" alt="Card image cap"/>
-        <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card product" style="width: 18rem;">
-      <img class="card-img-top" src="/images/car.jpg" alt="Card image cap"/>
-        <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
+}
   </div>
-  
+  </div>
+   <script type="text/javascript">
+       function processData(){
+           var name = document.querySelector('#name').value;
+           var priceMin = document.querySelector('#priceMin').value;
+           var priceMax = document.querySelector('#priceMax').value;
+           location.href ='?name='+ name +"&priceMin=" + priceMin + "&priceMax=" + priceMax;
+       }
+       </script>
+
    <!-- End offers -->
    <!-- End Home -->
