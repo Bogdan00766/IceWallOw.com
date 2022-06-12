@@ -210,3 +210,27 @@
       </div>
     </div>
   </main>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        
+  <script>// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  window.addEventListener('load', function () {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+  }, false)
+})()</script>
