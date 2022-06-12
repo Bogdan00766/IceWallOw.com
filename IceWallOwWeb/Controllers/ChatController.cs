@@ -14,11 +14,10 @@ namespace IceWallOwWeb.Controllers
         {
             if (Request.Cookies["GUID"] == null)
                 return Unauthorized();
-            #pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8604 // Possible null reference argument.
             Guid guid = Guid.Parse(Request.Cookies["GUID"]);
-            #pragma warning restore CS8604 // Possible null reference argument.
-
-            return View(new ChatViewModel() { ChatId = ChatId });
+#pragma warning restore CS8604 // Possible null reference argument.
+            return View(new ChatViewModel() { ChatId = ChatId, Guid = guid });
         }
     }
 }
