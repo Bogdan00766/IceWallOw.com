@@ -1,4 +1,5 @@
-﻿using IceWallOwWeb.Models;
+﻿using IceWallOw.Application.Dto;
+using IceWallOwWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,9 +14,19 @@ namespace IceWallOwWeb.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+
+            HttpClient client = new HttpClient();
+            string queryString = "https://localhost:7053/api/Products";
+
+            var response = await client.GetAsync(queryString);
+            var statusCode = response.StatusCode;
+            var body = await response.Content.ReadAsStringAsync();
+
+            var list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ProductDto>>(body);
+
+            return View(list);
         }
 
         public IActionResult Privacy()
