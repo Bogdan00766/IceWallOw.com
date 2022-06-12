@@ -86,6 +86,13 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
+//websockets
+var webSocketsOptions = new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromSeconds(5)
+};
+app.UseWebSockets(webSocketsOptions);
+
 app.Run();
 
 
