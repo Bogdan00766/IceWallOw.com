@@ -5,33 +5,35 @@ using Newtonsoft.Json;
 using System.Net.WebSockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using IceWallOw.Application.Interfaces;
 
 namespace IceWallOw.Api.Controllers
 {
     public class WebSocketController : ControllerBase, IDisposable
     {
+        private readonly IWebSocketService _webSocketService;
         protected class WebSocketMessage
         {
             public WebSocketReceiveResult ReceiveResult { get; }
             public MessageDto? Message { get; }
-            public WebSocketMessage(WebSocketReceiveResult _receiveResult, byte[] message)
+            public WebSocketMessage(WebSocketReceiveResult _receiveResult, byte[] message, IWebSocketService webSocketService, ILogger<WebSocketController> logger)
             {
                 ReceiveResult = _receiveResult;
                 string result = Encoding.UTF8.GetString(message);
-                MessageDto? mes;
-                    mes = JsonConvert.DeserializeObject<MessageDto>(result);
+                MessageDto? mes = JsonConvert.DeserializeObject<MessageDto?>(result);
                 if (mes != null)
                 {
-                    if (mes.Content == null || mes.Content == String.Empty)
+                    if (mes.Content == null || mes.Content == String.Empty || (mes.Owner == null && mes.OwnerGuid == null))
                         return;
                     Message = new MessageDto()
                     {
                         ChatId = mes.ChatId,
                         Content = mes.Content,
                         Date = DateTime.Now,
-                        Id = 2
+                        Id = 2,
+                        Owner = (mes.Owner != null) ? mes.Owner : webSocketService.FindUserByGuid((Guid)mes.OwnerGuid)
+                    };
                 };
-            }
             }
             public override string ToString()
             {
@@ -40,9 +42,10 @@ namespace IceWallOw.Api.Controllers
         }
         private WebSocket? _webSocket;
         private ILogger<WebSocketController> _logger;
-        public WebSocketController(ILogger<WebSocketController> logger)
+        public WebSocketController(ILogger<WebSocketController> logger, IWebSocketService webSocketService)
         {
             _logger = logger;
+            _webSocketService = webSocketService;
         }
         [HttpGet("/chat")]
         public async Task Get()
@@ -64,7 +67,7 @@ namespace IceWallOw.Api.Controllers
             }
             byte[] buffer = new byte[1024 * 4];
             var received = await _webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-            var message = new WebSocketMessage(received, buffer);
+            var message = new WebSocketMessage(received, buffer, _webSocketService, _logger);
             return message;
         }
         private async Task Write(WebSocketMessage webSocketMessage)
@@ -84,11 +87,13 @@ namespace IceWallOw.Api.Controllers
         }
         private async Task Echo()
         {
-            var received = await Read();
-            received.Message.Date = DateTime.Now;
+            WebSocketMessage received = await Read();
+            if(received.Message != null)
+                received.Message.Date = DateTime.Now;
             while(!received.ReceiveResult.CloseStatus.HasValue)
             {
-                await Write(received);
+                if(received.Message != null)
+                    await Write(received);
                 received = await Read();
             }
         }
