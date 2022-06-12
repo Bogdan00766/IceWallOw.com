@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+*.db-shm
+*.db-wal
+
 # User-specific files
 *.rsuser
 *.suo
@@ -365,3 +368,5 @@ FodyWeavers.xsd
 #SQLite files
 IceWallOw.Api/*.db-shm
 IceWallOw.Api/*.db-wal
+*.db-shm
+*.db-wal
