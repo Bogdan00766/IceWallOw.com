@@ -1,12 +1,29 @@
 ﻿
 @model List<IceWallOw.Application.Dto.ProductDto>
 
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
-      <div class="row products"> 
+      <div class="row"> 
+        <div class="col-lg-3 form-filter">
+            <h3>Filtrowanie danych</h3>
+            <input class="form-control me-2"  placeholder="Nazwa produktu" aria-label="Search" id="name">
+            <input class="form-control me-2"  placeholder="Cena minimalna" aria-label="Search" id="priceMin">
+            <input class="form-control me-2"  placeholder="Cena maksymalna" aria-label="Search" id="priceMax">
+            <button class="btn btn-outline-success" type="submit" onclick="processData()">Search</button>
+        </div>
+        <div class="col-lg-9">
+    @*
+<form action="/action_page.php" method="post">
+  <input type="text" id="@product.Name" name="fname"><br><br>
+  <input type="submit" value="Submit">
+</form>*@
+
+    
     <h1>Produkty</h1>
+    <div class="row products"> 
 @foreach (var product in Model)
 {
     
@@ -15,15 +32,25 @@
         <div class="card-body">
         <h5 class="card-title">@product.Name</h5>
         <p class="card-text">@product.Description</p>
-        <p class="card-text">@product.Price</p>
+        <p class="card-text">@product.Price zł</p>
         <p class="card-text">@product.CategoryName</p>
-        <a href="@product.Location" class="btn btn-primary">@product.Location</a>
+        <p class="card-text">@product.Location</p>
+        <a href="/Home/ProductDesc?id=@product.Id" class="btn btn-primary">Opis produktu</a>
+        </div>
       </div>
-    </div>
+    
 
 }
   </div>
-
+  </div>
+   <script type="text/javascript">
+       function processData(){
+           var name = document.querySelector('#name').value;
+           var priceMin = document.querySelector('#priceMin').value;
+           var priceMax = document.querySelector('#priceMax').value;
+           location.href ='?name='+ name +"&priceMin=" + priceMin + "&priceMax=" + priceMax;
+       }
+       </script>
 
    <!-- End offers -->
    <!-- End Home -->

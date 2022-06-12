@@ -32,14 +32,12 @@ p{
     margin-bottom:100px;
 }
 
-
-.products {
-    background-color: rgba(0,0,0,0.5);
-    margin: 20px 50px;
+.products{
+    align-content: center
 }
 
 .product {
-    margin: 10px 20px;
+    margin: 10px 15px;
     padding: 10px;
     border-radius: 5%;
 }
@@ -54,4 +52,14 @@ p{
     margin-top: 10px;
     margin-bottom: 10px;
     width: 80%;
+}
+
+.form-filter input{
+    margin: 30px auto 10px auto;
+    height: 50px;
+    
+}
+main{
+    width: 90vw;
+    margin: 0 auto;
 }
