@@ -72,7 +72,7 @@ namespace IceWallOw.Application.Services
             if(password == null) throw new Exception("Password, cannot be null");
             if(email == null) throw new Exception("Email cannot be null");
 
-            password = name + email;
+            password = email + password;
 
             byte[] hash;
             using (SHA256 sha256 = SHA256.Create()) 
