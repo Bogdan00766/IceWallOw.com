@@ -73,9 +73,11 @@ namespace IceWallOw.Api.Controllers
         private async Task Echo()
         {
             var received = await Read();
+            received.Message.Date = DateTime.Now;
             while(!received.ReceiveResult.CloseStatus.HasValue)
             {
                 await Write(received);
+                received = await Read();
             }
         }
 
