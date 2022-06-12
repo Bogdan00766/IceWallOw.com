@@ -55,6 +55,7 @@ namespace IceWallOw.Api.Controllers
             catch (Exception e)
             {
                 if (e.Message.Contains("Wrong password")) return BadRequest("Wrong password");
+                if (e.Message.Contains("User not found")) return BadRequest("User not found");
                 return StatusCode(500);
             }
 
