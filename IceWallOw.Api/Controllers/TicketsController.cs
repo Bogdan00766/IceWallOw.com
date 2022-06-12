@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using IceWallOw.Application.Dto;
 using IceWallOw.Application.Interfaces;
+using Domain.Models;
 
 namespace IceWallOw.Api.Controllers
 {
@@ -23,43 +24,52 @@ namespace IceWallOw.Api.Controllers
             _producer = producer;
             _consumer = consumer;
         }
-        [HttpPost("CreateTicket")]
-        public async Task<IActionResult> CreateTicket()
+        [HttpGet("CreateTicket")]
+        public async Task<IActionResult> CreateTicket(string title)
         {
-            var guid = Guid.Parse(Request.Headers["GUID"]);
+            if (Request.Cookies["GUID"] == null)
+                return Unauthorized();
+            Guid guid = Guid.Parse(Request.Cookies["GUID"]);
             var user = _ticketService.FindUserByGuid(guid);
-            _logger.LogInformation(0, "Creating token for " + user.Id);
-            _logger.LogError(1, "Creating tokens not implemented");
+            if (user == null)
+                return BadRequest();
+            if (title.Contains('\'') || title.Contains('\"'))
+                return BadRequest();
+            _logger.LogInformation(0, "Creating ticket for " + user.Id);
 
-            throw new NotImplementedException("Pobieranie ticketu nie zostalo zaimplementowane");
-
-            var token = new TicketDto(0)
-            {
-                Chat = new ChatDto(1)
-            };
+            TicketDto ticket = _ticketService.NewTicket(new TicketDto { Title = title }, user);
 
 
-            _logger.LogInformation(2, $"Received tokenId {token.Id} for clientId {user.Id}");
-            _logger.LogInformation(3, $"Sending tokenId {token.Id} to broker");
+            _logger.LogInformation(1, $"Received ticketId {ticket.Id} for clientId {user.Id}");
+            _logger.LogInformation(2, $"Sending ticketId {ticket.Id} to broker");
             await _producer.ProduceAsync("Tickets", new Message<Null, int>()
             {
-                Value = token.Id
+                Value = (int)ticket.Id
             });
             _producer.Flush();
-            return Ok(token);
+            return Ok(ticket);
         }
 
-        [HttpPost("GetNewTicket")]
-        public async Task<IActionResult> GetNewTicket()
+        [HttpPost("GetNextTicket")]
+        public async Task<IActionResult> GetNextTicket()
         {
-            _consumer.Subscribe("Tickets");
+            if (Request.Cookies["GUID"] == null)
+                return Unauthorized();
+            Guid guid = Guid.Parse(Request.Cookies["GUID"]);
+            var user = _ticketService.FindUserByGuid(guid);
+            if (user == null)
+                return Unauthorized();
             var message = await Task.Run(() => _consumer.Consume(TimeSpan.FromSeconds(10)));
-            if (message == null) return NoContent();
-            var token = new TicketDto(message.Message.Value)
+            if (message == null)
             {
-                Chat = new ChatDto(0)
-            };
-            return Ok(token);
+                _logger.LogInformation(0, $"User {user.Id} tried to pull new ticket, but find none");
+                return NoContent();
+            }
+            _logger.LogDebug("User " + user.Id);
+            var ticket = await _ticketService.ClaimTicketById(message.Message.Value, user);
+            if (ticket == null) return StatusCode(500);
+            _logger.LogInformation(1, $"User {user.Id} pulled ticket {ticket.Id}");
+            return Ok(ticket);
         }
     }
 }

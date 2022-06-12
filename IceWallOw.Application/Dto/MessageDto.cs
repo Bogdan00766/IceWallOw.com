@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace IceWallOw.Application.Dto
 {
-    public class TicketDto
+    public class MessageDto
     {
         public int? Id { get; set; }
-        public string Title { get; set; }
-        public ChatDto Chat { get; set; }
-
+        public string Content { get; set; }
+        public DateTime? Date { get; set; }
+        public int ChatId { get; set; }
     }
 }

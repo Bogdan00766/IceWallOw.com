@@ -60,16 +60,59 @@ namespace IceWallOw.Api.Controllers
 
             var resp = new HttpResponseMessage();
 
-            Guid id = Guid.NewGuid();
-            _userService.SetGuid(id, user.Id);
-            HttpContext.Response.Cookies.Append("GUID",id.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
+            Guid guid = Guid.NewGuid();
+            _userService.SetGuid(guid, user.Id);
+            HttpContext.Response.Cookies.Append("GUID",guid.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
             {
                 Expires = DateTime.Now.AddDays(1),
-                // every othe options like path , ...
             });
 
             return Ok(user);
         }
+
+        [HttpGet("Logout")]
+        public IActionResult Logout()
+        {
+            var guidString = Request.Cookies["GUID"];
+            Guid guid;
+            try
+            {
+                guid = Guid.Parse(guidString);
+            }
+            catch(Exception e)
+            {
+                _logger.LogCritical($"Error while parsing guid: {guidString}");
+                return BadRequest("Error while parsing guid");
+            }
+            try
+            {
+                _userService.Logout(guid);
+                return Ok("User logged out sucessfully");
+            }
+            catch(Exception e)
+            {
+                return Unauthorized(e.Message);
+            }
+        }
+
+        [HttpGet("isLogged")]
+        public IActionResult IsLogged()
+        {
+            var guidString = Request.Cookies["GUID"];
+            Guid guid;
+            try
+            {
+                guid = Guid.Parse(guidString);
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical($"Error while parsing guid: {guidString}");
+                return BadRequest("Error while parsing guid");
+            }
+            if (_userService.IsLogged(guid)) return Ok(true);
+            return Unauthorized(false);
+        }
+
         [HttpDelete]
         public void Set(string key, string value, int? expireTime)
         {

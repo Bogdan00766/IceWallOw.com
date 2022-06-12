@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+*.db-shm
+*.db-wal
+
 # User-specific files
 *.rsuser
 *.suo
@@ -239,8 +242,6 @@ ClientBin/
 *.pfx
 *.publishsettings
 orleans.codegen.cs
-*.db-shm
-*db-wal
 
 # Including strong name files can present a security risk
 # (https://github.com/github/gitignore/pull/2483#issue-259490424)
@@ -363,3 +364,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+#SQLite files
+IceWallOw.Api/*.db-shm
+IceWallOw.Api/*.db-wal
+*.db-shm
+*.db-wal

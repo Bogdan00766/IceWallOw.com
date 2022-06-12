@@ -52,12 +52,14 @@ namespace DbInfrastructure.Repositories
         {
             var user = _dbContext.User.Where(x => x.Id == userId).FirstOrDefault();
             user.AutoLoginGUID = id.ToString();
-            user.AutoLoginGUIDExpires = DateTime.Now;
+            user.AutoLoginGUIDExpires = DateTime.Now.AddDays(1);
         }
 
         public User? FindUserByGUID(Guid guid)
         {
-            return _dbContext.User.Where(x => x.AutoLoginGUID == guid.ToString()).FirstOrDefault();
+            var user =  _dbContext.User.Where(x => x.AutoLoginGUID == guid.ToString()).FirstOrDefault();
+            if (user != null && user.AutoLoginGUIDExpires >= DateTime.Now.AddDays(1)) return null;
+            return user;
         }
     }
 }

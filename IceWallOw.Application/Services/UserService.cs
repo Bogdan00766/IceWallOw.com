@@ -31,9 +31,21 @@ namespace IceWallOw.Application.Services
             throw new NotImplementedException();
         }
 
+        public UserDto FindByGuid(Guid guid)
+        {
+            return _mapper.Map<UserDto>(_userRepository.FindUserByGUID(guid));
+        }
+
         public bool ForgotPassword(string email)
         {
             throw new NotImplementedException();
+        }
+
+        public bool IsLogged(Guid guid)
+        {
+            var user = _userRepository.FindUserByGUID(guid);
+            if (user == null) return false;
+            return true;
         }
 
         public UserDto Login(string email, string password)
@@ -56,13 +68,14 @@ namespace IceWallOw.Application.Services
             else throw new Exception("Wrong password");
         }
 
-        public async Task<bool> Logout(int id)
+        public void Logout(Guid guid)
         {
-            var user = await _userRepository.FindByIdAsync(id);
-            //if (user.IsLogged == false) throw new Exception("User is not logged");
-            //user.IsLogged = false;
+            var user = _userRepository.FindUserByGUID(guid);
+            if (user == null) throw new Exception("User is not logged in");
+            user.AutoLoginGUID = Guid.Empty.ToString();
+            user.AutoLoginGUIDExpires = DateTime.MinValue;
+
             _userRepository.SaveAsync();
-            return true;
         }
 
         public UserDto Register(string name, string lastName, string password, string email)
@@ -72,7 +85,7 @@ namespace IceWallOw.Application.Services
             if(password == null) throw new Exception("Password, cannot be null");
             if(email == null) throw new Exception("Email cannot be null");
 
-            password = name + email;
+            password = email + password;
 
             byte[] hash;
             using (SHA256 sha256 = SHA256.Create()) 
@@ -85,7 +98,7 @@ namespace IceWallOw.Application.Services
                 LastName = lastName,
                 Password = hash,
                 EMail = email,
-                //IsLogged = false,
+                Role = 0,
             };
             
             var usr = _userRepository.Create(user);
