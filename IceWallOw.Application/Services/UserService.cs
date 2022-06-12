@@ -46,7 +46,7 @@ namespace IceWallOw.Application.Services
             byte[] hash;
             using (SHA256 sha256 = SHA256.Create())
             {
-                hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(user.Name+password));
+                hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(email+password));
             }
             if (_userRepository.CheckPassword(email, hash))
             {
@@ -72,7 +72,7 @@ namespace IceWallOw.Application.Services
             if(password == null) throw new Exception("Password, cannot be null");
             if(email == null) throw new Exception("Email cannot be null");
 
-            password = name + password;
+            password = email + password;
 
             byte[] hash;
             using (SHA256 sha256 = SHA256.Create()) 
