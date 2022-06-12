@@ -27,15 +27,9 @@ namespace IceWallOw.Api.Controllers
         [HttpGet("CreateTicket")]
         public async Task<IActionResult> CreateTicket(string title)
         {
-            Guid guid;
-            try
-            {
-                guid = Guid.Parse(Request.Headers["GUID"]);
-            }
-            catch (System.ArgumentNullException)
-            {
-                return Unauthorized("GUID cookie cannot null");
-            }
+            if (Request.Cookies["GUID"] == null)
+                return Unauthorized();
+            Guid guid = Guid.Parse(Request.Cookies["GUID"]);
             var user = _ticketService.FindUserByGuid(guid);
             if (user == null)
                 return BadRequest();
@@ -59,15 +53,9 @@ namespace IceWallOw.Api.Controllers
         [HttpPost("GetNextTicket")]
         public async Task<IActionResult> GetNextTicket()
         {
-            Guid guid;
-            try
-            {
-                guid = Guid.Parse(Request.Headers["GUID"]);
-            }
-            catch (System.ArgumentNullException)
-            {
-                return Unauthorized("GUID cookie cannot null");
-            }
+            if (Request.Cookies["GUID"] == null)
+                return Unauthorized();
+            Guid guid = Guid.Parse(Request.Cookies["GUID"]);
             var user = _ticketService.FindUserByGuid(guid);
             if (user == null)
                 return Unauthorized();
@@ -78,7 +66,7 @@ namespace IceWallOw.Api.Controllers
                 return NoContent();
             }
             _logger.LogDebug("User " + user.Id);
-            var ticket = await _ticketService.GetTicketById(message.Message.Value);
+            var ticket = await _ticketService.ClaimTicketById(message.Message.Value, user);
             if (ticket == null) return StatusCode(500);
             _logger.LogInformation(1, $"User {user.Id} pulled ticket {ticket.Id}");
             return Ok(ticket);
