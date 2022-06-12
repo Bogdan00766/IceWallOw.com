@@ -69,6 +69,32 @@ namespace IceWallOw.Api.Controllers
 
             return Ok(user);
         }
+
+        [HttpGet("Logout")]
+        public IActionResult Logout()
+        {
+            var guidString = Request.Cookies["GUID"];
+            Guid guid;
+            try
+            {
+                guid = Guid.Parse(guidString);
+            }
+            catch(Exception e)
+            {
+                _logger.LogCritical($"Error while parsing guid: {guidString}");
+                return BadRequest("Error while parsing guid");
+            }
+            try
+            {
+                _userService.Logout(guid);
+                return Ok("User logged out sucessfully");
+            }
+            catch(Exception e)
+            {
+                return Unauthorized(e.Message);
+            }
+        }
+
         [HttpDelete]
         public void Set(string key, string value, int? expireTime)
         {

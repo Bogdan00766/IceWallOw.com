@@ -11,12 +11,12 @@ namespace IceWallOw.Application.Interfaces
     public interface IUserService
     {
         UserDto Login(string username, string password);
-        Task<bool> Logout(int id);
+        void Logout(Guid guid);
         UserDto Register(string name, string lastName, string password, string email);
         void SetGuid(Guid id, int userId);
         bool ChangePassword(int id, string newpassword);
         bool ForgotPassword(string email);
         
-        //bool ChangeEmail(string email);
+        UserDto FindByGuid(Guid guid);
     }
 }

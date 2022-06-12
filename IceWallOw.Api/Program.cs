@@ -45,27 +45,27 @@ builder.Services.AddSingleton<IConsumer<Null, int>>(x =>
     consumer.Subscribe("Tickets");
     return consumer;
 });
-//kafka setup
-using (var adminClient = new AdminClientBuilder(new AdminClientConfig { BootstrapServers = "kafka:29092" }).Build())
-{
-    try
-    {
-        if(adminClient.GetMetadata(TimeSpan.FromSeconds(5)).Topics.Where(x => x.Topic == "Tickets").FirstOrDefault() == null)
-            adminClient.CreateTopicsAsync(new TopicSpecification[]
-            {
-                new TopicSpecification
-                {
-                    Name = "Tickets",
-                    ReplicationFactor = 1,
-                    NumPartitions = 1
-                }
-            });
-    }
-    catch(CreateTopicsException e)
-    {
-        throw e;
-    }
-}
+////kafka setup
+//using (var adminClient = new AdminClientBuilder(new AdminClientConfig { BootstrapServers = "kafka:29092" }).Build())
+//{
+//    try
+//    {
+//        if(adminClient.GetMetadata(TimeSpan.FromSeconds(5)).Topics.Where(x => x.Topic == "Tickets").FirstOrDefault() == null)
+//            adminClient.CreateTopicsAsync(new TopicSpecification[]
+//            {
+//                new TopicSpecification
+//                {
+//                    Name = "Tickets",
+//                    ReplicationFactor = 1,
+//                    NumPartitions = 1
+//                }
+//            });
+//    }
+//    catch(CreateTopicsException e)
+//    {
+//        throw e;
+//    }
+//}
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
