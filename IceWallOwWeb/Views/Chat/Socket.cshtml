@@ -114,7 +114,7 @@
             let message = new Message();
             message.Content = sendMessage.value;
             message.ChatId = @Model.ChatId;
-            message.OwnerGuid = @Model.Guid;
+            message.OwnerGuid = "@Model.Guid";
             return JSON.stringify(message);
         }
 
