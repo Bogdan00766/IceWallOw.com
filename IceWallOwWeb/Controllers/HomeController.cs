@@ -33,6 +33,10 @@ namespace IceWallOwWeb.Controllers
         {
             return View();
         }
+        public IActionResult ProductDesc()
+        {
+            return View();
+        }
         public IActionResult Checkout()
         {
             return View();

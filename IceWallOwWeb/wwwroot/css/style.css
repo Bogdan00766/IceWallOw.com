@@ -3,6 +3,7 @@
 
    *{
         padding: 0;
+        margin:0;
 }
 :root{
     --txt-red:#f63440;
@@ -30,106 +31,8 @@ p{
 #header{
     margin-bottom:100px;
 }
-#header .navbar-nav .nav-item .nav-link {
-    color: var(--txt-black);
-    text-align: center;
-    padding: .25rem 1.9rem;
-}
-
-#header .navbar-nav .nav-item .nav-link:active,
-#header .navbar-nav .nav-item .nav-link:hover {
-    color: var(--txt-red);
-}
-/*HOME*/
-.home .carousel-inner{
-    margin: 0;
-}
-/* section */
-.home .home-banner-1,
-.home .home-banner-2 {
-    background-size: cover;
-    background-position: center;
-    min-height: 600px;
-    position: relative;
-    background-repeat: no-repeat;
-}
-
-.home .home-banner-1 {
-    background-color: blue;
-}
-
-.home .home-banner-2 {
-    background-color: blue;
-}
-
-.home .home-banner-text {
-    position: absolute;
-    top: 10%;
-    left: 20%;
-}
-
-    .home .home-banner-text h1 {
-        font-size: 7rem;
-    }
-
-    .home .home-banner-text h2 {
-        font-size: 5rem;
-    }
-
-.home .btn-danger {
-    padding: 2rem 4rem;
-    border-radius: 5%;
-}
 
 
-@media(max-width: 769px) {
-    .home .home-banner-1,
-    .home .home-banner-2 {
-        background-size: cover;
-        background-position: center;
-        min-height: 500px;
-        position: relative;
-        background-repeat: no-repeat;
-    }
-
-    .home .home-banner-text {
-        position: absolute;
-        top: 25%;
-        left: 35%;
-    }
-
-        .home .home-banner-text h1 {
-            font-size: 4rem;
-        }
-
-        .home .home-banner-text h2 {
-            font-size: 2rem;
-        }
-
-    .home .btn-danger {
-        padding: 1rem 2rem
-    }
-}
-
-@media(max-width: 400px) {
-    .home .home-banner-text {
-        position: absolute;
-        top: 15%;
-        left: 25%;
-    }
-
-        .home .home-banner-text h1 {
-            font-size: 3rem;
-        }
-
-        .home .home-banner-text h2 {
-            font-size: 1.5rem;
-        }
-
-    .home .btn-danger {
-        padding: 1rem 2rem
-    }
-}
 .products {
     background-color: rgba(0,0,0,0.5);
     margin: 20px 50px;
@@ -141,9 +44,9 @@ p{
     border-radius: 5%;
 }
 
-    .product img {
-        border-radius: 10%;
-    }
+.product img {
+    border-radius: 10%;
+}
 
 .ticket {
     margin-left: auto;
@@ -151,7 +54,4 @@ p{
     margin-top: 10px;
     margin-bottom: 10px;
     width: 80%;
-}
-.row {
-    margin-top: 100px;
 }
