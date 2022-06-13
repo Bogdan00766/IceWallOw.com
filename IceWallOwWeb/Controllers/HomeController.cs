@@ -25,6 +25,10 @@ namespace IceWallOwWeb.Controllers
         public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var cock = Request.Cookies["GUID"];
+            if (cock == null)
+            {
+                ViewData["is_logged"] = false;
+            }
             if (await IsLoggedAsync(cock))
             {
                 ViewData["is_logged"] = true;
@@ -97,7 +101,6 @@ namespace IceWallOwWeb.Controllers
             }
 
             HttpClient client = new HttpClient();
-
 
             return View();
         }
