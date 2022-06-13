@@ -11,6 +11,7 @@ namespace IceWallOw.Application.Interfaces
     {
         UserDto? FindUserByGuid(Guid guid);
         Task PutMessage(MessageDto message);
-        Task<ICollection<MessageDto>> GetMessages(ChatDto chat);
+        Task<ICollection<MessageDto>?> GetMessages(ChatDto chat);
+        Task<ChatDto> FindChatById(int chatId);
     }
 }

@@ -11,30 +11,49 @@ using System.Threading.Tasks;
 
 namespace IceWallOw.Application.Services
 {
-    public class WebSocketService : IChatService
+    public class ChatService : IChatService
     {
         private readonly IUserRepository _userRepository;
         private readonly IChatRepository _chatRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly IMapper _mapper;
-        public WebSocketService(IUserRepository userRepository, IChatRepository chatRepository, IMessageRepository messageRepository, IMapper mapper)
+        public ChatService(IUserRepository userRepository, IChatRepository chatRepository, IMessageRepository messageRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _chatRepository = chatRepository;
             _messageRepository = messageRepository;
             _mapper = mapper;
         }
+
+        public async Task<ChatDto> FindChatById(int chatId)
+        {
+            var chat = await _chatRepository.FindByIdAsync(chatId);
+            var chatUsers = new List<UserDto>();
+            var chatDto = new ChatDto
+            {
+                Id = chatId,
+                Users = new List<UserDto>()
+            };
+            chatUsers.ForEach(user =>
+            {
+                chatDto.Users.Add(_mapper.Map<UserDto>(user));
+            });
+            return chatDto;
+        }
+
         public UserDto? FindUserByGuid(Guid guid)
         {
             return _mapper.Map<UserDto?>(_userRepository.FindUserByGUID(guid));
         }
 
-        public async Task<ICollection<MessageDto>> GetMessages(ChatDto chatDto)
+        public async Task<ICollection<MessageDto>?> GetMessages(ChatDto chatDto)
         {
             var chat = await _chatRepository.FindByIdAsync(chatDto.Id);
             if (chat == null)
                 throw new NotImplementedException("Chat doesnot exist");
             var messages = new List<MessageDto>();
+            if (chat == null || chat.Messages == null)
+                return null;
             chat.Messages.ForEach(message =>
             {
                 var messageDto = new MessageDto()
