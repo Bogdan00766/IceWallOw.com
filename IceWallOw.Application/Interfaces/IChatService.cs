@@ -10,7 +10,7 @@ namespace IceWallOw.Application.Interfaces
     public interface IChatService
     {
         UserDto? FindUserByGuid(Guid guid);
-        Task<MessageDto> PutMessage(MessageDto message);
+        Task PutMessage(MessageDto message);
         Task<ICollection<MessageDto>> GetMessages(ChatDto chat);
     }
 }

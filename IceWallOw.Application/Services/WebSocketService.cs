@@ -49,9 +49,16 @@ namespace IceWallOw.Application.Services
             return messages;
         }
 
-        public Task<MessageDto> PutMessage(MessageDto message)
+        public async Task PutMessage(MessageDto messageDto)
         {
-            throw new NotImplementedException();
+            var message = new Message()
+            {
+                SentFrom = _mapper.Map<User>(messageDto.SentFrom),
+                Content = messageDto.Content,
+                Date = (DateTime)messageDto.Date,
+                Chat = await _chatRepository.FindByIdAsync(messageDto.ChatId)
+            };
+            _messageRepository.Create(message);
         }
     }
 }
