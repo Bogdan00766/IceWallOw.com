@@ -72,12 +72,13 @@ namespace IceWallOw.Application.Services
         {
             var message = new Message()
             {
-                SentFrom = _mapper.Map<User>(messageDto.SentFrom),
+                SentFrom = await _userRepository.FindByIdAsync(messageDto.SentFrom.Id), //_mapper.Map<User>(messageDto.SentFrom),
                 Content = messageDto.Content,
                 Date = (DateTime)messageDto.Date,
                 Chat = await _chatRepository.FindByIdAsync(messageDto.ChatId)
             };
             _messageRepository.Create(message);
+            _messageRepository.SaveAsync();
         }
     }
 }
