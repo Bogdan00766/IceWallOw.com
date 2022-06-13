@@ -2,43 +2,7 @@
 @model IceWallOw.Application.Dto.RegisterUserDto
 @ViewData["body_response"] 
 @using (Html.BeginForm("RegisterPage", "Home", FormMethod.Post))
- {@*
-        
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th colspan="2" align="center">Person Details</th>
-            </tr>
-            <tr>
-                <td>Name: </td>
-                <td>
-                    @Html.TextBoxFor(m => m.Name)
-                </td>
-            </tr>
-            <tr>
-                <td>LastName: </td>
-                <td>
-                    @Html.TextBoxFor(m => m.LastName)
-                </td>
-            </tr>
-            <tr>
-                <td>EMail: </td>
-                <td>
-                    @Html.TextBoxFor(m => m.EMail)
-                </td>
-            </tr>
-            <tr>
-                <td>Password: </td>
-                <td>
-                    @Html.TextBoxFor(m => m.Password)
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Submit"/></td>
-            </tr>
-        </table>
-    }
-*@
+ {
 <section class="vh-60">
       <div class="container-fluid">
         <div class="row">

@@ -1,6 +1,7 @@
 ﻿using IceWallOw.Application.Dto;
 using IceWallOwWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Linq;
@@ -19,11 +20,25 @@ namespace IceWallOwWeb.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            
+        }
+        public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        {
+            var cock = Request.Cookies["GUID"];
+            if (await IsLoggedAsync(cock))
+            {
+                ViewData["is_logged"] = true;
+            }
+            else
+            {
+                ViewData["is_logged"] = false;
+            }
+            await next();
         }
 
         public async Task<IActionResult> Index(string? name = null, string? location = null, int? distance = null, string? categoryName = null, float? priceMin = null, float? priceMax = null)//(float priceMin, float priceMax)
         {
-
+            
             HttpClient client = new HttpClient();
             //$...../id={
             string queryString = "http://localhost:5000/api/Products?";

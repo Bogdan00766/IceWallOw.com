@@ -13,7 +13,8 @@
             <input class="form-control me-2"  placeholder="Cena minimalna" aria-label="Search" id="priceMin">
             <input class="form-control me-2"  placeholder="Cena maksymalna" aria-label="Search" id="priceMax">
             <input class="form-control me-2"  placeholder="Kategoria" aria-label="Search" id="categoryName">
-             <button class="btn btn-outline-success">Search</button>
+            <input class="form-control me-2"  placeholder="localizacja" aria-label="Search" id="location1">
+             <button class="btn" onclick=processData()>Search</button>
         </div>
         <div class="col-lg-9">
     @*
@@ -49,7 +50,8 @@
            var name = document.querySelector('#name').value;
            var priceMin = document.querySelector('#priceMin').value;
            var priceMax = document.querySelector('#priceMax').value;
-           var categoryName= document.querySelector('#categoryName').value;
+           var categoryName = document.querySelector('#categoryName').value;
+           var location1 = document.querySelector('#location1').value;
            
            location.href ='?name='+ name +"&priceMin=" + priceMin + "&priceMax=" + priceMax + "&categoryName=" + categoryName 
        }

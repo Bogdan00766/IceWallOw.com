@@ -16,39 +16,44 @@
 </head>
 <body>
 
-   <section id="header">
-      <nav class="navbar navbar-expand-lg bg-light fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="/Home/Index">BUGOVSCY</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/Home/Index">Strona główna</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/Home/Checkout">Koszyk</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/Home/Tickets">Bilety</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/Home/Chatbox">Chat</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/Home/AddProduct">Dodaj Produkt</a>
-              </li>
-              <li class="nav-item">
+           <section id="header">
+              <nav class="navbar navbar-expand-lg bg-light fixed-top">
+                <div class="container">
+                  <a class="navbar-brand" href="/Home/Index">BUGOVSCY</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                      <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/Home/Index">Strona główna</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/Home/Checkout">Koszyk</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/Home/Tickets">Bilety</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/Home/Chatbox">Chat</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/Home/AddProduct">Dodaj Produkt</a>
+                      </li>
+                      @if (bool.Parse(ViewData["is_logged"].ToString()))
+                    {
+                      <li class="nav-item">
+                        <a class="nav-link" href="/Home/LogoutPage">Wyloguj się</a>
+                      </li>        
+                    }
+                    else{
+                    <li class="nav-item">
                 <a class="nav-link" href="/Home/LoginPage">Logowanie</a>
-              </li>
-              <li class="nav-item">
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/Home/RegisterPage">Rejestracja</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/Home/LogoutPage">Wyloguj się</a>
-              </li>
+            </li>
+            }
             </ul>
           </div>
         </div>
