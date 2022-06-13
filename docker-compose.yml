@@ -27,6 +27,7 @@ services:
     ports:
       - 5000:80
       - 5001:443
+      - 5001:80
     depends_on:
       - zookeeper
       - kafka
