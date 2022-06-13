@@ -11,12 +11,12 @@ namespace IceWallOw.Api.Controllers
 {
     public class WebSocketController : ControllerBase, IDisposable
     {
-        private readonly IWebSocketService _webSocketService;
+        private readonly IChatService _chatService;
         protected class WebSocketMessage
         {
             public WebSocketReceiveResult ReceiveResult { get; }
             public MessageDto? Message { get; }
-            public WebSocketMessage(WebSocketReceiveResult _receiveResult, byte[] message, IWebSocketService webSocketService, ILogger<WebSocketController> logger)
+            public WebSocketMessage(WebSocketReceiveResult _receiveResult, byte[] message, IChatService chatService, ILogger<WebSocketController> logger)
             {
                 ReceiveResult = _receiveResult;
                 string result = Encoding.UTF8.GetString(message);
@@ -31,7 +31,7 @@ namespace IceWallOw.Api.Controllers
                         Content = mes.Content,
                         Date = DateTime.Now,
                         Id = 2,
-                        Owner = (mes.Owner != null) ? mes.Owner : webSocketService.FindUserByGuid((Guid)mes.OwnerGuid)
+                        Owner = (mes.Owner != null) ? mes.Owner : chatService.FindUserByGuid((Guid)mes.OwnerGuid)
                     };
                 };
             }
@@ -42,10 +42,10 @@ namespace IceWallOw.Api.Controllers
         }
         private WebSocket? _webSocket;
         private ILogger<WebSocketController> _logger;
-        public WebSocketController(ILogger<WebSocketController> logger, IWebSocketService webSocketService)
+        public WebSocketController(ILogger<WebSocketController> logger, IChatService chatService)
         {
             _logger = logger;
-            _webSocketService = webSocketService;
+            _chatService = chatService;
         }
         [HttpGet("/chat")]
         public async Task Get()
@@ -67,7 +67,7 @@ namespace IceWallOw.Api.Controllers
             }
             byte[] buffer = new byte[1024 * 4];
             var received = await _webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-            var message = new WebSocketMessage(received, buffer, _webSocketService, _logger);
+            var message = new WebSocketMessage(received, buffer, _chatService, _logger);
             return message;
         }
         private async Task Write(WebSocketMessage webSocketMessage)

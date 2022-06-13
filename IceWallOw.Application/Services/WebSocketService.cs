@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IceWallOw.Application.Services
 {
-    public class WebSocketService : IWebSocketService
+    public class WebSocketService : IChatService
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;

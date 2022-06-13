@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace IceWallOw.Application.Interfaces
 {
-    public interface IWebSocketService
+    public interface IChatService
     {
         UserDto? FindUserByGuid(Guid guid);
+
     }
 }
