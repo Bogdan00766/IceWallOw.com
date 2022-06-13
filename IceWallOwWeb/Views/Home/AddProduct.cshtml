@@ -1,0 +1,55 @@
+﻿
+@model IceWallOw.Application.Dto.CreateProductDto
+@ViewData["body_response"] 
+@using (Html.BeginForm("AddProduct", "Home", FormMethod.Post))
+ {
+<section class="vh-60">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6 text-black">
+   
+            <div>
+    
+              <form style="width: 20rem;">
+    
+                <h3 class="pb-3" style="letter-spacing: 1px;">Dodawanie produktu</h3>
+                
+                <div class="form-outline mb-4">
+                  @Html.TextBoxFor(m => m.Name,new {@class="form-control form-control-lg"})
+                  <label class="form-label" for="form2Example18">Nazwa produktu</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  @Html.TextBoxFor(m => m.Description,new {@class="form-control form-control-lg"})
+                  <label class="form-label" for="form2Example18">Opis produktu</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  @Html.TextBoxFor(m => m.Price,new {@class="form-control form-control-lg"})
+                  <label class="form-label" for="form2Example18">Cena</label>
+                </div>
+                
+                <div class="form-outline mb-4">
+                  @Html.TextBoxFor(m => m.Location,new {@class="form-control form-control-lg"})
+                  <label class="form-label" for="form2Example18">Lokalizacja</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  @Html.TextBoxFor(m => m.CategoryName,new {@class="form-control form-control-lg"})
+                  <label class="form-label" for="form2Example28">Kategoria produktu</label>
+                </div>
+    
+                <div class="pt-2 mb-4">
+                  <button class="btn btn-lg" type="submit">Dodaj produkt</button>
+                </div>
+    
+              </form>
+    
+            </div>
+            <div>@ViewData["body_response"]</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    }

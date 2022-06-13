@@ -150,7 +150,8 @@ namespace IceWallOwWeb.Controllers
             }
             else
             {
-                return BadRequest(body);
+                ViewData["body_response"] = body;
+                return View();
             }
 
 
@@ -217,6 +218,60 @@ namespace IceWallOwWeb.Controllers
 
             return bool.Parse(body);
         }
+
+        public async Task<ActionResult> AddProductAsync()
+        {
+            var cock = Request.Cookies["GUID"];
+            if (!(await IsLoggedAsync(cock)))
+            {
+                return Unauthorized("User is not already logged");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddProductAsync(CreateProductDto product)
+        {
+            var cock = Request.Cookies["GUID"];
+            if (!(await IsLoggedAsync(cock)))
+            {
+                return Unauthorized("User is not already logged");
+            }
+
+
+            string queryString = $"http://localhost:5000/api/Products";
+            CookieContainer cookies = new CookieContainer();
+            HttpClientHandler handler = new HttpClientHandler();
+
+            handler.CookieContainer = cookies;
+
+            var json = System.Text.Json.JsonSerializer.Serialize(product);
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            HttpClient client = new HttpClient(handler);
+
+            cookies.Add(new Uri("http://localhost:5000"), new Cookie("GUID", cock));
+            var response = await client.PostAsync(queryString, stringContent);
+            var statusCode = response.StatusCode;
+            var body = await response.Content.ReadAsStringAsync();
+
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                var item = System.Text.Json.JsonSerializer.Deserialize<ProductDto>(body);
+
+                var str = "ProductDesc" + '?' + "id=" + item.Id;
+                return RedirectToAction(str, "Home");
+            }
+            else
+            {
+                return BadRequest(body);
+            }
+        }
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
