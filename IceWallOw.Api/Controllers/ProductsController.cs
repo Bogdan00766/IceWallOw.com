@@ -58,6 +58,8 @@ namespace IceWallOw.Api.Controllers
             return Ok(output);
         }
 
+        
+
         [SwaggerOperation(Summary = "Retrieves specific product by ID")]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)

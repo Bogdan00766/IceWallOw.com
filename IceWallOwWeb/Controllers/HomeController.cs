@@ -5,7 +5,10 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Web;
 
 namespace IceWallOwWeb.Controllers
 {
@@ -259,10 +262,10 @@ namespace IceWallOwWeb.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                var item = System.Text.Json.JsonSerializer.Deserialize<ProductDto>(body);
+                var item = Newtonsoft.Json.JsonConvert.DeserializeObject<ProductDto>(body); ;
 
-                var str = "ProductDesc" + '?' + "id=" + item.Id;
-                return RedirectToAction(str, "Home");
+                //var str = "ProductDesc" + '?' + "id=" + item.Id;
+                return RedirectToAction("ProductDesc", "Home", new {id = item.Id});
             }
             else
             {
