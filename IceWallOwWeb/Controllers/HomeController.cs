@@ -61,6 +61,7 @@ namespace IceWallOwWeb.Controllers
 
             return View(list);
         }
+       
 
         public IActionResult Privacy()
         {
