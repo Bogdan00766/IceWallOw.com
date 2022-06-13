@@ -1,11 +1,15 @@
 ﻿using IceWallOw.Application.Dto;
 using IceWallOwWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Web;
 
 namespace IceWallOwWeb.Controllers
 {
@@ -16,11 +20,25 @@ namespace IceWallOwWeb.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            
+        }
+        public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        {
+            var cock = Request.Cookies["GUID"];
+            if (await IsLoggedAsync(cock))
+            {
+                ViewData["is_logged"] = true;
+            }
+            else
+            {
+                ViewData["is_logged"] = false;
+            }
+            await next();
         }
 
         public async Task<IActionResult> Index(string? name = null, string? location = null, int? distance = null, string? categoryName = null, float? priceMin = null, float? priceMax = null)//(float priceMin, float priceMax)
         {
-
+            
             HttpClient client = new HttpClient();
             //$...../id={
             string queryString = "http://localhost:5000/api/Products?";
@@ -150,7 +168,8 @@ namespace IceWallOwWeb.Controllers
             }
             else
             {
-                return BadRequest(body);
+                ViewData["body_response"] = body;
+                return View();
             }
 
 
@@ -217,6 +236,60 @@ namespace IceWallOwWeb.Controllers
 
             return bool.Parse(body);
         }
+
+        public async Task<ActionResult> AddProductAsync()
+        {
+            var cock = Request.Cookies["GUID"];
+            if (!(await IsLoggedAsync(cock)))
+            {
+                return Unauthorized("User is not already logged");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddProductAsync(CreateProductDto product)
+        {
+            var cock = Request.Cookies["GUID"];
+            if (!(await IsLoggedAsync(cock)))
+            {
+                return Unauthorized("User is not already logged");
+            }
+
+
+            string queryString = $"http://localhost:5000/api/Products";
+            CookieContainer cookies = new CookieContainer();
+            HttpClientHandler handler = new HttpClientHandler();
+
+            handler.CookieContainer = cookies;
+
+            var json = System.Text.Json.JsonSerializer.Serialize(product);
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            HttpClient client = new HttpClient(handler);
+
+            cookies.Add(new Uri("http://localhost:5000"), new Cookie("GUID", cock));
+            var response = await client.PostAsync(queryString, stringContent);
+            var statusCode = response.StatusCode;
+            var body = await response.Content.ReadAsStringAsync();
+
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                var item = Newtonsoft.Json.JsonConvert.DeserializeObject<ProductDto>(body); ;
+
+                //var str = "ProductDesc" + '?' + "id=" + item.Id;
+                return RedirectToAction("ProductDesc", "Home", new {id = item.Id});
+            }
+            else
+            {
+                return BadRequest(body);
+            }
+        }
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
