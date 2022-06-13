@@ -11,27 +11,26 @@ namespace IceWallOw.Api.Controllers
 {
     public class WebSocketController : ControllerBase, IDisposable
     {
-        private readonly IWebSocketService _webSocketService;
+        private readonly IChatService _chatService;
         protected class WebSocketMessage
         {
             public WebSocketReceiveResult ReceiveResult { get; }
             public MessageDto? Message { get; }
-            public WebSocketMessage(WebSocketReceiveResult _receiveResult, byte[] message, IWebSocketService webSocketService, ILogger<WebSocketController> logger)
+            public WebSocketMessage(WebSocketReceiveResult _receiveResult, byte[] message, IChatService chatService, ILogger<WebSocketController> logger)
             {
                 ReceiveResult = _receiveResult;
                 string result = Encoding.UTF8.GetString(message);
                 MessageDto? mes = JsonConvert.DeserializeObject<MessageDto?>(result);
                 if (mes != null)
                 {
-                    if (mes.Content == null || mes.Content == String.Empty || (mes.Owner == null && mes.OwnerGuid == null))
+                    if (mes.Content == null || mes.Content == String.Empty || (mes.SentFrom == null && mes.OwnerGuid == null))
                         return;
                     Message = new MessageDto()
                     {
                         ChatId = mes.ChatId,
                         Content = mes.Content,
                         Date = DateTime.Now,
-                        Id = 2,
-                        Owner = (mes.Owner != null) ? mes.Owner : webSocketService.FindUserByGuid((Guid)mes.OwnerGuid)
+                        SentFrom = (mes.SentFrom != null) ? mes.SentFrom : chatService.FindUserByGuid((Guid)mes.OwnerGuid)
                     };
                 };
             }
@@ -42,10 +41,10 @@ namespace IceWallOw.Api.Controllers
         }
         private WebSocket? _webSocket;
         private ILogger<WebSocketController> _logger;
-        public WebSocketController(ILogger<WebSocketController> logger, IWebSocketService webSocketService)
+        public WebSocketController(ILogger<WebSocketController> logger, IChatService chatService)
         {
             _logger = logger;
-            _webSocketService = webSocketService;
+            _chatService = chatService;
         }
         [HttpGet("/chat")]
         public async Task Get()
@@ -67,7 +66,10 @@ namespace IceWallOw.Api.Controllers
             }
             byte[] buffer = new byte[1024 * 4];
             var received = await _webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-            var message = new WebSocketMessage(received, buffer, _webSocketService, _logger);
+            var message = new WebSocketMessage(received, buffer, _chatService, _logger);
+            _logger.LogInformation(0, $"Received message {message.Message.Content} on chat {message.Message.ChatId}");
+            _chatService.PutMessage(message.Message);
+            _logger.LogInformation(1, $"Inserted message {message.Message.Content} in database on chat {message.Message.ChatId}");
             return message;
         }
         private async Task Write(WebSocketMessage webSocketMessage)
@@ -84,6 +86,9 @@ namespace IceWallOw.Api.Controllers
                 webSocketMessage.ReceiveResult.MessageType,
                 webSocketMessage.ReceiveResult.EndOfMessage,
                 CancellationToken.None);
+            _logger.LogInformation(2, $"Sent message to {webSocketMessage.Message.ChatId} with content {webSocketMessage.Message.Content}");
+            _chatService.PutMessage(webSocketMessage.Message);
+            _logger.LogInformation(3, $"Inserted message {webSocketMessage.Message.Content} in database on chat {webSocketMessage.Message.ChatId}");
         }
         private async Task Echo()
         {

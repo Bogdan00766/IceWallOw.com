@@ -37,7 +37,8 @@ namespace IceWallOwWeb.Controllers
             return View(new ChatViewModel() { ChatId = ChatId, Guid = guid });
         }
 
-        public async Task<bool> IsLoggedAsync(String guid)
+
+        async Task<bool> IsLoggedAsync(String guid)
         {
             string queryString = $"http://localhost:5000/api/Users/isLogged";
             CookieContainer cookies = new CookieContainer();
@@ -54,6 +55,5 @@ namespace IceWallOwWeb.Controllers
 
             return bool.Parse(body);
         }
-
     }
 }

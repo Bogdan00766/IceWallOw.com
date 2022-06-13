@@ -8,11 +8,10 @@ namespace IceWallOw.Application.Dto
 {
     public class MessageDto
     {
-        public int? Id { get; set; }
         public string Content { get; set; }
         public DateTime? Date { get; set; }
         public int ChatId { get; set; }
-        public UserDto? Owner { get; set; }
+        public UserDto? SentFrom { get; set; }
         public Guid? OwnerGuid { get; set; }
     }
 }
