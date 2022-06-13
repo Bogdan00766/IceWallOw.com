@@ -9,20 +9,8 @@
     <link href="@Url.Content("~/css/ProductDescStyle.css")" rel="stylesheet" type="text/css" />
 }
 
-@*<div class="card product" style="width: 18rem;">
-      <img class="card-img-top" src="@product.PhotoPath" alt="Card image cap"/>
-        <div class="card-body">
-        <h5 class="card-title">@product.Name</h5>
-        <p class="card-text">@product.Description</p>
-        <p class="card-text">@product.Price zł</p>
-        <p class="card-text">@product.CategoryName</p>
-        <p class="card-text">@product.Location</p>
-        <a href="/Home/ProductDesc?id=@product.Id" class="btn btn-primary"></a>
-      </div>
-    </div>*@
-
 <link rel="stylesheet" type="text/css" href="/css/style.css">
- <div class="container" id="product-section">
+ <div class="container" id="product-section" style="margin-top: 100px">
       <div class="row">
         <div class="col-md-6">
           <img
@@ -37,13 +25,13 @@
            <div class="col-md-12">
             <h1>@Model.Name</h1>
            </div>
-          </div><!-- end row-->
+          </div>
           
           <div class="row">
             <div class="col-md-12">
              <span class="label label-primary">@Model.Location</span>
             </div>
-           </div><!-- end row -->
+           </div>
 
            <div class="row">
             <div class="col-md-12">
@@ -51,26 +39,22 @@
               @Model.Description
              </p>
             </div>
-           </div><!-- end row -->
+           </div>
           
            <div class="row">
             <div class="col-md-12 bottom-rule">
              <h2 class="product-price">Cena: @Model.Price zł</h2>
             </div>
-           </div><!-- end row -->
+           </div>
 
            <div class="col-md-6">
             <a href="/Home/Index" class="btn btn-primary" >
              Powrót do menu
             </a>
            </div>
-          </div><!-- end row -->
+          </div>
 
-         </div><!-- end row -->
+         </div>
 
-      </div><!-- end container -->
+      </div>
      </div>
-
-
-   <!-- End offers -->
-   <!-- End Home -->

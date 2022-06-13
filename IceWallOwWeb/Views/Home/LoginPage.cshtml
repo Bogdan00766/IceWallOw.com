@@ -19,7 +19,7 @@
                 </div>
     
                 <div class="form-outline mb-4">
-                @Html.TextBoxFor(m => m.Password,new {@class="form-control form-control-lg"})
+                @Html.TextBoxFor(m => m.Password,new {@class="form-control form-control-lg",@type="password"})
                   <label class="form-label">Hasło</label>
                 </div>
     
@@ -29,7 +29,7 @@
     
               </form>
             </div>
-            <div>@ViewData["body_response"]</div>
+            @*<div>@ViewData["body_response"]</div>*@
           </div>
         </div>
       </div>
