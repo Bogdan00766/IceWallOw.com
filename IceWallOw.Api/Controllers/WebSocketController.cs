@@ -23,7 +23,7 @@ namespace IceWallOw.Api.Controllers
                 MessageDto? mes = JsonConvert.DeserializeObject<MessageDto?>(result);
                 if (mes != null)
                 {
-                    if (mes.Content == null || mes.Content == String.Empty || (mes.Owner == null && mes.OwnerGuid == null))
+                    if (mes.Content == null || mes.Content == String.Empty || (mes.SentFrom == null && mes.OwnerGuid == null))
                         return;
                     Message = new MessageDto()
                     {
@@ -31,7 +31,7 @@ namespace IceWallOw.Api.Controllers
                         Content = mes.Content,
                         Date = DateTime.Now,
                         Id = 2,
-                        Owner = (mes.Owner != null) ? mes.Owner : chatService.FindUserByGuid((Guid)mes.OwnerGuid)
+                        SentFrom = (mes.SentFrom != null) ? mes.SentFrom : chatService.FindUserByGuid((Guid)mes.OwnerGuid)
                     };
                 };
             }

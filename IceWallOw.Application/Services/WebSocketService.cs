@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.IRepositories;
+using Domain.Models;
 using IceWallOw.Application.Dto;
 using IceWallOw.Application.Interfaces;
 using System;
@@ -28,9 +29,24 @@ namespace IceWallOw.Application.Services
             return _mapper.Map<UserDto?>(_userRepository.FindUserByGUID(guid));
         }
 
-        public Task<ICollection<MessageDto>> GetMessages(ChatDto chat)
+        public async Task<ICollection<MessageDto>> GetMessages(ChatDto chatDto)
         {
-            throw new NotImplementedException();
+            var chat = await _chatRepository.FindByIdAsync(chatDto.Id);
+            if (chat == null)
+                throw new NotImplementedException("Chat doesnot exist");
+            var messages = new List<MessageDto>();
+            chat.Messages.ForEach(message =>
+            {
+                var messageDto = new MessageDto()
+                {
+                    SentFrom = _mapper.Map<UserDto>(message.SentFrom),
+                    ChatId = message.Chat.Id,
+                    Content = message.Content,
+                    Date = message.Date
+                };
+                messages.Add(messageDto);
+            });
+            return messages;
         }
 
         public Task<MessageDto> PutMessage(MessageDto message)
