@@ -17,7 +17,7 @@
             Date;
             ChatId;
             OwnerGuid;
-            Owner;
+            SentFrom;
         };
         class User
         {
@@ -166,7 +166,7 @@
                 commsLog.innerHTML += '<tr>' +
                     '<td class="commslog-server">Server</td>' +
                     '<td class="commslog-client">Client</td>' +
-                    '<td class="commslog-data">' + htmlEscape('ID: ' + message.Id + ' by ' + message.Owner.Name + ' on chat ' + message.ChatId + ' date ' + message.Date + ' wrote: ' + message.Content) 
+                    '<td class="commslog-data">' + htmlEscape('ID: ' + message.Id + ' by ' + message.SentFrom.Name + ' on chat ' + message.ChatId + ' date ' + message.Date + ' wrote: ' + message.Content) 
                     + '</td></tr>';
             };
         };
