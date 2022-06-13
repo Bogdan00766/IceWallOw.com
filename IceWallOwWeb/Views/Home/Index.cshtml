@@ -18,15 +18,9 @@
              <button class="btn" onclick=processData()>Wyszukaj</button>
         </div>
         <div class="col-lg-9">
-    @*
-<form action="/action_page.php" method="post">
-  <input type="text" id="@product.Name" name="fname"><br><br>
-  <input type="submit" value="Submit">
-</form>*@
 
-    
     <h1>Produkty</h1>
-    <div class="row products"> 
+    <div class="row"> 
 @foreach (var product in Model)
 {
     
@@ -58,6 +52,3 @@
            location.href ='?name='+ name +"&priceMin=" + priceMin + "&priceMax=" + priceMax + "&location=" +  location1 + "&distance=" +  distance;
        }
        </script>
-
-   <!-- End offers -->
-   <!-- End Home -->
