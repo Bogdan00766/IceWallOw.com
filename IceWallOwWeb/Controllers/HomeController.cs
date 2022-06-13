@@ -219,7 +219,7 @@ namespace IceWallOwWeb.Controllers
             
         }
 
-        async Task<bool> IsLoggedAsync(String guid)
+        public async Task<bool> IsLoggedAsync(String guid)
         {
             string queryString = $"http://localhost:5000/api/Users/isLogged";
             CookieContainer cookies = new CookieContainer();
