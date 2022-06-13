@@ -6,44 +6,39 @@
     ViewData["Title"] = "Home Page";
 }
 
-      <div class="row"> 
+      <div class="row" style="margin-top: 100px;">
         <div class="col-lg-3 form-filter">
             <h3>Filtrowanie danych</h3>
-            <input class="form-control me-2"  placeholder="Nazwa produktu" aria-label="Search" id="name">
-            <input class="form-control me-2"  placeholder="Cena minimalna" aria-label="Search" id="priceMin">
-            <input class="form-control me-2"  placeholder="Cena maksymalna" aria-label="Search" id="priceMax">
-            <input class="form-control me-2"  placeholder="Kategoria" aria-label="Search" id="categoryName">
-            <input class="form-control me-2"  placeholder="localizacja" aria-label="Search" id="location1">
-             <button class="btn" onclick=processData()>Search</button>
+            <input class="form-control me-2" type="text" placeholder="Nazwa produktu"  id="name">
+            <input class="form-control me-2" type="number"  placeholder="Cena minimalna" id="priceMin">
+            <input class="form-control me-2" type="number"  placeholder="Cena maksymalna" id="priceMax">
+            <input class="form-control me-2" type="text"  placeholder="Kategoria" id="categoryName">
+            <input class="form-control me-2" type="number"  placeholder="Dystans" id="distance">
+            <input class="form-control me-2" type="text"  placeholder="Lokalizacja" id="location1">
+             <button class="btn" onclick=processData()>Wyszukaj</button>
         </div>
         <div class="col-lg-9">
-    @*
-<form action="/action_page.php" method="post">
-  <input type="text" id="@product.Name" name="fname"><br><br>
-  <input type="submit" value="Submit">
-</form>*@
 
-    
     <h1>Produkty</h1>
-    <div class="row products"> 
+    <div class="row"> 
 @foreach (var product in Model)
 {
     
     <div class="card product" style="width: 18rem;">
-      <img class="card-img-top" src="@product.PhotoPath" alt="Card image cap"/>
+      <img class="card-img-top" src="/images/unknown.jpg" alt="Card image cap"/>
         <div class="card-body">
-        <h5 class="card-title">@product.Name</h5>
-        <p class="card-text">@product.Description</p>
-        <p class="card-text">@product.Price zł</p>
-        <p class="card-text">@product.CategoryName</p>
-        <p class="card-text">@product.Location</p>
-        <a href="/Home/ProductDesc?id=@product.Id" class="btn btn-primary">Opis produktu</a>
+            <h5 class="card-title">@product.Name</h5>
+            <p class="card-text">@product.Description</p>
+            <p class="card-text">@product.Price zł</p>
+            <p class="card-text">@product.CategoryName</p>
+            <p class="card-text">@product.Location</p>
+            <a href="/Home/ProductDesc?id=@product.Id" class="btn btn-primary">Opis produktu</a>
         </div>
       </div>
     
 
 }
-  </div>
+     </div>
   </div>
    <script type="text/javascript">
        function processData(){
@@ -52,10 +47,8 @@
            var priceMax = document.querySelector('#priceMax').value;
            var categoryName = document.querySelector('#categoryName').value;
            var location1 = document.querySelector('#location1').value;
+           var distance = document.querySelector('#distance').value;
            
-           location.href ='?name='+ name +"&priceMin=" + priceMin + "&priceMax=" + priceMax + "&categoryName=" + categoryName 
+           location.href ='?name='+ name +"&priceMin=" + priceMin + "&priceMax=" + priceMax + "&location=" +  location1 + "&distance=" +  distance;
        }
        </script>
-
-   <!-- End offers -->
-   <!-- End Home -->

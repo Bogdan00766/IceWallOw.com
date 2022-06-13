@@ -19,7 +19,7 @@ namespace IceWallOw.GoogleMaps
             String requestString = $"https://maps.googleapis.com/maps/api/distancematrix/json?destinations={destination}&origins={origin}&key={apiKey}";
             var response = await client.GetAsync(requestString);
             var responseBody = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(responseBody);
+            //Console.WriteLine(responseBody);
             GDResponse? responseJSON = JsonSerializer.Deserialize<GDResponse>(responseBody);
             
 

@@ -26,7 +26,7 @@
       <div class="row">
         <div class="col-md-6">
           <img
-           src="~/images/car.jpg"
+           src="/images/unknown.jpg"
            class="image-responsive"
            style="max-width: 100%"
           />
@@ -41,14 +41,13 @@
           
           <div class="row">
             <div class="col-md-12">
-             <span class="label label-primary">Vintage</span>
-             <span class="monospaced">No. 1960140180</span>
+             <span class="label label-primary">@Model.Location</span>
             </div>
            </div><!-- end row -->
 
            <div class="row">
             <div class="col-md-12">
-             <p class="description">
+             <p>
               @Model.Description
              </p>
             </div>
@@ -56,14 +55,14 @@
           
            <div class="row">
             <div class="col-md-12 bottom-rule">
-             <h2 class="product-price">@Model.Price</h2>
+             <h2 class="product-price">Cena: @Model.Price zł</h2>
             </div>
            </div><!-- end row -->
 
            <div class="col-md-6">
-            <button class="btn btn-lg btn-brand btn-full-width">
-             Kontakt
-            </button>
+            <a href="/Home/Index" class="btn btn-primary" >
+             Powrót do menu
+            </a>
            </div>
           </div><!-- end row -->
 

@@ -2,52 +2,28 @@
 
 @using (Html.BeginForm("LoginPage", "Home", FormMethod.Post))
  {
-        
-       @* <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th colspan="2" align="center">Person Details</th>
-            </tr>
-            <tr>
-                <td>PersonId: </td>
-                <td>
-                    @Html.TextBoxFor(m => m.EMail)
-                </td>
-            </tr>
-            <tr>
-                <td>Name: </td>
-                <td>
-                    @Html.TextBoxFor(m => m.Password)
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Submit"/></td>
-            </tr>
-        </table>*@
-  
-<section class="vh-60">
+     <section class="vh-60" style="margin-top: 100px;">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6 text-black">
     
             <div>
     
-              <form style="width: 20rem;" method="post">
+              <form style="width: 20rem; " method="post">
     
                 <h3 class="pb-3" style="letter-spacing: 1px;">Zaloguj się</h3>
     
                 <div class="form-outline mb-4">
-                  @*<input type="text" class="form-control form-control-lg" name="Email">*@
                   @Html.TextBoxFor(m => m.EMail,new {@class="form-control form-control-lg"})
-                  <label class="form-label" for="form2Example18" >Email</label>
+                  <label class="form-label" >Email</label>
                 </div>
     
                 <div class="form-outline mb-4">
                 @Html.TextBoxFor(m => m.Password,new {@class="form-control form-control-lg"})
-                  <label class="form-label" for="form2Example28">Hasło</label>
+                  <label class="form-label">Hasło</label>
                 </div>
     
-                <div class="pt-2 mb-4">
+                <div class="pt-4 mb-4">
                   <button class="btn btn-lg" type="submit">Zaloguj się</button>
                 </div>
     

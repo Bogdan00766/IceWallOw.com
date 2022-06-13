@@ -5,21 +5,14 @@
         padding: 0;
         margin:0;
 }
-:root{
-    --txt-red:#f63440;
-    --bg-light-white:#f5f5f5;
-    --main-font: "Poppins", sans-serif;
-    --txt-black: #121212;
-    --txt-gray: #ababab;
-    --txt-dark-gray: #797979;
-}
+
 body {
-    font-family: var(--main-font);
+    font-family: "Poppins", sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.75rem;
-    background: var(--bg-white);
-    color: var(--text-black);
+    background: #f5f5f5;
+    color: #121212;
     overflow-x: hidden;
 }
 a:hover, a{
@@ -27,9 +20,6 @@ a:hover, a{
 }
 p{
     margin:0;
-}
-#header{
-    margin-bottom:100px;
 }
 
 .products{
