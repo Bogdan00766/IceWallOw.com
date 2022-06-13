@@ -30,7 +30,6 @@ namespace IceWallOw.Api.Controllers
                         ChatId = mes.ChatId,
                         Content = mes.Content,
                         Date = DateTime.Now,
-                        Id = 2,
                         SentFrom = (mes.SentFrom != null) ? mes.SentFrom : chatService.FindUserByGuid((Guid)mes.OwnerGuid)
                     };
                 };
@@ -68,6 +67,9 @@ namespace IceWallOw.Api.Controllers
             byte[] buffer = new byte[1024 * 4];
             var received = await _webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             var message = new WebSocketMessage(received, buffer, _chatService, _logger);
+            _logger.LogInformation(0, $"Received message {message.Message.Content} on chat {message.Message.ChatId}");
+            _chatService.PutMessage(message.Message);
+            _logger.LogInformation(1, $"Inserted message {message.Message.Content} in database on chat {message.Message.ChatId}");
             return message;
         }
         private async Task Write(WebSocketMessage webSocketMessage)
@@ -84,6 +86,9 @@ namespace IceWallOw.Api.Controllers
                 webSocketMessage.ReceiveResult.MessageType,
                 webSocketMessage.ReceiveResult.EndOfMessage,
                 CancellationToken.None);
+            _logger.LogInformation(2, $"Sent message to {webSocketMessage.Message.ChatId} with content {webSocketMessage.Message.Content}");
+            _chatService.PutMessage(webSocketMessage.Message);
+            _logger.LogInformation(3, $"Inserted message {webSocketMessage.Message.Content} in database on chat {webSocketMessage.Message.ChatId}");
         }
         private async Task Echo()
         {
