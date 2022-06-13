@@ -81,18 +81,18 @@ namespace IceWallOwWeb.Controllers
             return View(product);
         }
 
-        public IActionResult Checkout()
-        {
-            return View();
-        }
-        public IActionResult Chatbox()
-        {
-            return View();
-        }
-        public IActionResult Tickets()
-        {
-            return View();
-        }
+        //public IActionResult Checkout()
+        //{
+        //    return View();
+        //}
+        //public IActionResult Chatbox()
+        //{
+        //    return View();
+        //}
+        //public IActionResult Tickets()
+        //{
+        //    return View();
+        //}
         public async Task<IActionResult> RegisterPageAsync()
         {
             var cock = Request.Cookies["GUID"];
